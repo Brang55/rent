@@ -1,0 +1,50 @@
+.propertyItem li:nth-child(3n) {
+  margin-right: 0;
+}
+
+.propertyName a {
+  display: block;
+  padding: 0 25px;
+  font-size: 23px;
+}
+
+.propertyName:hover a {
+  color: #f4511e;
+}
+
+.propertyType {
+  display: block;
+  padding: 0 25px;
+  font-size: 18px;
+  color: #818181;
+}
+
+.propertyPrice {
+  padding: 0 25px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #f4511e;
+}
+
+.roomInfo {
+  margin-top: 20px;
+  border-top: 1px solid #e4e4e4;
+}
+
+.roomInfo span {
+  float: left;
+  width: 33%;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  border-right: 1px solid #e4e4e4;
+}
+
+.roomInfo span img {
+  margin-right: 10px;
+}
+
+.roomInfo span:last-of-type {
+  border-right: none;
+}

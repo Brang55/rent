@@ -1,0 +1,50 @@
+.infoHeadingHolder {
+  float: left;
+  width: 100%;
+}
+
+h3 {
+  font-size: 36px;
+  margin-bottom: 0;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}
+
+.headingUnderline {
+  display: block;
+  float: left;
+  margin: 0;
+  width: 30%;
+  color: #f4511e;
+}
+
+.infoImageHolder {
+  float: left;
+  width: 40%;
+}
+
+.infoDetailsHolder {
+  float: left;
+  width: 60%;
+  padding: 80px 0 0 5px;
+  margin: 0;
+}
+
+.infoDetailsHolder li {
+  float: left;
+  width: 33%;
+  margin-bottom: 60px;
+}
+
+.infoDetailsHolder li p {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.infoDetailsHolder li .iconHolder {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 2px #eee;
+}

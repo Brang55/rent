@@ -1,0 +1,454 @@
+@import url("https://fonts.cdnfonts.com/css/dm-sans");
+
+:root {
+  font-family: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: "Inter var", sans-serif;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+body {
+  float: left;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  font-family: "DM Sans", sans-serif;
+}
+
+section,
+article {
+  float: left;
+  width: 100%;
+}
+
+.big-container {
+  position: relative;
+  width: 1440px;
+  margin: 0 auto;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER STARTS */
+
+/* .header {
+  position: absolute;
+  top: 0;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 35px 0 0 0;
+  border-bottom: 1px solid #fff;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+
+.nav-header ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-header ul li {
+  margin-right: 5%;
+}
+
+.nav-header ul li a {
+  font-size: 18px;
+  color: #fff;
+  padding: 15px;
+}
+
+.nav-header ul li a:hover {
+  border-bottom: 2.5px solid #fff;
+}
+
+.nav-header ul li a.active {
+  border-bottom: 2.5px solid #fff;
+} */
+
+/* MAP COMPONENT */
+
+/* .map-holder {
+  position: relative;
+  height: 790px;
+}
+
+.map-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+  height: 790px;
+  margin-bottom: 35px;
+  background-image: url(./images/big-header.png);
+  background-repeat: no-repeat;
+  -moz-box-shadow: inset 10px 10px 50px #000;
+  -webkit-box-shadow: inset 10px 10px 50px #000;
+  box-shadow: inset 10px 10px 50px #000;
+}
+
+.slogan {
+  width: 50%;
+  font-size: 50px;
+  color: #fff;
+} */
+
+/* INFO COMPONENT */
+
+/* .info-heading-holder {
+  float: left;
+  width: 100%;
+}
+
+h3 {
+  font-size: 36px;
+  margin-bottom: 0;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}
+
+.heading-underline {
+  display: block;
+  float: left;
+  margin: 0;
+  width: 30%;
+  color: #f4511e;
+}
+
+.info-image-holder {
+  float: left;
+  width: 40%;
+}
+
+.info-details-holder {
+  float: left;
+  width: 60%;
+  padding: 80px 0 0 5px;
+  margin: 0;
+}
+
+.info-details-holder li {
+  float: left;
+  width: 33%;
+  margin-bottom: 60px;
+}
+
+.info-details-holder li p {
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.info-details-holder li .icon-holder {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 2px #eee;
+} */
+
+/* PROPERTY COMPONENT */
+
+/* .properties {
+  padding: 60px 0;
+  margin-bottom: 50px;
+  background-color: #f5f5f5;
+}
+
+.heading-div {
+  float: left;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.heading-div h3 {
+  float: left;
+  margin: 0;
+}
+
+.all-properties {
+  margin-bottom: 40px;
+  text-align: center;
+  color: #f4511e;
+  font-size: 36px;
+  font-weight: 800;
+  font-family: "Inter", sans-serif;
+}
+
+.view-all {
+  float: right;
+  padding: 20px 30px;
+  margin-right: 50px;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: #f4511e;
+}
+
+.view-all:hover {
+  color: #f4511e;
+  background-color: #fff;
+  border: 1px solid #bdbdbd;
+}
+
+.property-item {
+  float: left;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.property-item li {
+  float: left;
+  width: 30%;
+  margin-right: 3%;
+  margin-bottom: 60px;
+  background-color: #fff;
+  border-radius: 27px;
+}
+
+.property-item li:nth-child(3n) {
+  margin-right: 0;
+}
+
+.property-name a {
+  display: block;
+  padding: 0 25px;
+  font-size: 23px;
+}
+
+.property-name:hover a {
+  color: #f4511e;
+}
+
+.property-type {
+  display: block;
+  padding: 0 25px;
+  font-size: 18px;
+  color: #818181;
+}
+
+.property-price {
+  padding: 0 25px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #f4511e;
+}
+
+.room-info {
+  margin-top: 20px;
+  border-top: 1px solid #e4e4e4;
+}
+
+.room-info span {
+  float: left;
+  width: 33%;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  border-right: 1px solid #e4e4e4;
+}
+
+.room-info span img {
+  margin-right: 10px;
+}
+
+.room-info span:last-of-type {
+  border-right: none;
+} */
+
+/* ROOMMATE COMPONENT */
+
+/* .roommate-section {
+  padding: 60px 0;
+}
+
+.rommate-facts {
+  padding: 0;
+  float: left;
+  width: 50%;
+}
+
+.rommate-facts li {
+  position: relative;
+  float: left;
+  min-height: 339px;
+  margin-right: 3%;
+  margin-bottom: 2%;
+}
+
+.rommate-facts li h4 {
+  width: 100%;
+  padding: 0 10px;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.roommate-info-holder {
+  float: left;
+  width: 50%;
+  margin-top: 50px;
+  padding: 50px 70px;
+}
+
+.roommate-info-holder h3 {
+  font-size: 40px;
+  text-align: center;
+}
+
+.roommate-info-holder p {
+  margin: 25px 0 40px 0;
+  font-size: 18px;
+  line-height: 32px;
+}
+
+.roommate-info-holder button {
+  float: left;
+} */
+
+/* FOOTER COMPONENT */
+
+/* .footer {
+  float: left;
+  width: 100%;
+  padding: 100px 0;
+  border-top: 1px solid #f4511e;
+}
+
+.footerLogo {
+  float: left;
+  width: 50%;
+}
+
+.infoHolder {
+  float: left;
+  width: 50%;
+}
+
+.strItem {
+  display: block;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.strItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(./images/place.png);
+}
+
+.phoneItem {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding-left: 30px;
+}
+
+.phoneItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(./images/phone.png);
+}
+
+.faxItem {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding-left: 30px;
+}
+
+.faxItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(./images/printshop.png);
+}
+
+.socialMedia {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.socialMedia li {
+  margin-right: 5%;
+}
+
+.socialMedia li {
+  font-size: 14px;
+  color: #888;
+  font-weight: 100;
+}
+
+.footerMenu {
+  float: left;
+  width: 100%;
+  margin-top: 50px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.footerMenu nav ul {
+  display: block;
+  padding: 0;
+}
+
+.footerMenu nav ul li {
+  float: left;
+  font-size: 14px;
+  color: #0a142f;
+  margin-right: 3%;
+}
+
+.footerMenu nav ul li:last-of-type {
+  float: right;
+  margin-right: 0;
+  color: #888;
+} */

@@ -1,0 +1,39 @@
+.personalMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.personalMenu li {
+  margin-right: 3%;
+}
+
+.personalMenuItem {
+  display: block;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #f4511e;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid transparent;
+}
+
+.personalMenuItem:hover {
+  color: #fff;
+  border: 1px solid #bdbdbd;
+  background-color: #f4511e;
+}
+
+.activeItem {
+  color: #fff;
+  border: 1px solid #bdbdbd;
+  background-color: #f4511e;
+}
+
+.settingHolder {
+  float: left;
+  width: 100%;
+  min-height: 400px;
+}

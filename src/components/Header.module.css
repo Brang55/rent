@@ -1,0 +1,14 @@
+.header {
+  position: relative;
+  z-index: 1;
+
+  padding: 20px 0;
+}
+
+.diffHeader {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+  border-bottom: 1px solid #fff;
+  background-color: #1e1a1a;
+}

@@ -1,0 +1,96 @@
+.footer {
+  float: left;
+  width: 100%;
+  padding: 100px 0;
+  border-top: 1px solid #f4511e;
+}
+
+.footerLogo {
+  float: left;
+  width: 50%;
+}
+
+.infoHolder {
+  float: left;
+  width: 50%;
+}
+
+.strItem {
+  display: block;
+  padding-left: 30px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.strItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../images/place.png);
+}
+
+.phoneItem {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding-left: 30px;
+}
+
+.phoneItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../images/phone.png);
+}
+
+.faxItem {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  padding-left: 30px;
+}
+
+.faxItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../images/printshop.png);
+}
+
+.footerMenu {
+  float: left;
+  width: 100%;
+  margin-top: 50px;
+  padding-top: 24px;
+  border-top: 1px solid #eee;
+}
+
+.footerMenu nav ul {
+  display: block;
+  padding: 0;
+}
+
+.footerMenu nav ul li {
+  float: left;
+  font-size: 14px;
+  color: #0a142f;
+  margin-right: 3%;
+}
+
+.footerMenu nav ul li:last-of-type {
+  float: right;
+  margin-right: 0;
+  color: #888;
+}

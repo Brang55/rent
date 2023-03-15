@@ -1,0 +1,44 @@
+.navHeader {
+  position: relative;
+  width: 1200px;
+  margin: 0 auto;
+  padding: 30px 0 20px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.navHeader ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navHeader ul li {
+  margin-right: 5%;
+}
+
+.navHeader ul li a {
+  font-size: 18px;
+  color: #fff;
+  padding: 20px;
+}
+
+.navHeader ul li a:hover {
+  border-bottom: 2.5px solid #fff;
+}
+
+.active {
+  border-bottom: 2.5px solid #fff !important;
+}
+
+.diffHeader .logo {
+  left: 20px;
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
