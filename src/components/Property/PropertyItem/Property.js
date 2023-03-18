@@ -1,9 +1,9 @@
 import styles from "./Property.module.css";
 
-import PropertyImg from "../images/property1.png";
-import Bed from "../images/bed.svg";
-import Shower from "../images/shower.svg";
-import Size from "../images/size.svg";
+import PropertyImg from "./images/property1.png";
+import Bed from "./images/bed.svg";
+import Shower from "./images/shower.svg";
+import Size from "./images/size.svg";
 
 function Property() {
   return (

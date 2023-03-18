@@ -1,6 +1,6 @@
-import Info from "./Info";
-import PropertyList from "./PropertyList";
-import Roommate from "./Roommate";
+import Info from "./Info/Info";
+import PropertyList from "./Property/PropertyList/PropertyList";
+import Roommate from "./Roommate/Roommate";
 
 import { useLocation } from "react-router-dom";
 import Account from "./myAccount/Account";

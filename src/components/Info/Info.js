@@ -1,12 +1,12 @@
 import styles from "./Info.module.css";
 
-import InfoImg from "../images/living-cost.png";
-import Dollar from "../images/money-dollar-circle.png";
-import Comm from "../images/community-line.png";
-import Stack from "../images/stack-line.png";
-import Plant from "../images/plant-line.png";
-import Shield from "../images/shield-star-line.png";
-import Eye from "../images/eye-line.png";
+import InfoImg from "./images/living-cost.png";
+import Dollar from "./images/money-dollar-circle.png";
+import Comm from "./images/community-line.png";
+import Stack from "./images/stack-line.png";
+import Plant from "./images/plant-line.png";
+import Shield from "./images/shield-star-line.png";
+import Eye from "./images/eye-line.png";
 
 function Info() {
   return (

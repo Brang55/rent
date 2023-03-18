@@ -1,8 +1,8 @@
-import SocialMedia from "./SocialMedia";
+import SocialMedia from "../SocialMedia/SocialMedia";
 
 import styles from "./Footer.module.css";
 
-import FooterLogo from "../images/logo.png";
+import FooterLogo from "./images/logo.png";
 
 function Footer() {
   return (

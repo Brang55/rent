@@ -1,4 +1,4 @@
-import styles from "./AddProperty.module.css";
+import styles from "./AddProperty/AddProperty";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { useEffect, useState } from "react";

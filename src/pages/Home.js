@@ -1,7 +1,7 @@
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
 import Main from "../components/Main";
-import Map from "../components/Map";
+import Map from "../components/Map/Map";
 
 function HomePage() {
   return (

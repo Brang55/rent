@@ -1,5 +1,5 @@
 import styles from "./AccountMenu.module.css";
-import AddProperty from "./AddProperty";
+import AddProperty from "./AddProperty/AddProperty";
 import { useState } from "react";
 import MyInformation from "./MyInformation";
 import MyProperties from "../MyProperties";

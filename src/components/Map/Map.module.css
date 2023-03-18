@@ -10,7 +10,7 @@
   width: 100%;
   height: 790px;
   margin-bottom: 35px;
-  background-image: url(../images/big-header.png);
+  background-image: url(./images/big-header.png);
   background-repeat: no-repeat;
   -moz-box-shadow: inset 10px 10px 50px #000;
   -webkit-box-shadow: inset 10px 10px 50px #000;

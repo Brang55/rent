@@ -1,4 +1,4 @@
-import PropertyList from "./PropertyList";
+import PropertyList from "./Property/PropertyList/PropertyList";
 
 function MyProperties() {
   return <PropertyList />;

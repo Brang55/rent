@@ -1,5 +1,5 @@
-import HomeProperties from "./HomeProperties";
-import Property from "./Property";
+import HomeProperties from "../../HomeProperties/HomeProperties";
+import PropertyItem from "../PropertyItem/Property";
 
 import styles from "./PropertyList.module.css";
 
@@ -10,13 +10,13 @@ function PropertyList() {
   return (
     <section className={styles.properties}>
       <div className="container">
-        {location.pathname == "/" ? (
+        {location.pathname === "/" ? (
           <HomeProperties />
         ) : (
           <h2 className={styles.allProperties}>Properties</h2>
         )}
         <ul className={styles.propertyItem}>
-          <Property />
+          <PropertyItem />
         </ul>
       </div>
     </section>

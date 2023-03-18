@@ -1,0 +1,158 @@
+.addProperty {
+  float: left;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.addPropertyHeading {
+  text-align: center;
+  font-size: 28px;
+  color: #f4511e;
+  font-weight: bold;
+}
+
+.addPropertyForm {
+  float: left;
+  width: 100%;
+  padding: 65px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0 20px 10px #eee;
+}
+
+.addPropertyForm .addPropInput {
+  float: left;
+  width: 30%;
+  margin-right: 3%;
+}
+
+.addPropertyForm .addPropInput label {
+  display: block;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.addPropertyForm .addPropInput input,
+.addPropertyForm .addPropInput select {
+  width: 100%;
+  padding: 10px 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.required {
+  display: inline-block;
+  color: #f4511e;
+  margin-left: 5px;
+}
+
+.addPropertyForm .addPropInput select {
+  background-color: transparent;
+}
+
+.description {
+  float: left;
+  width: 100%;
+  margin-top: 40px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.addPropertyForm textarea {
+  float: left;
+  width: 100%;
+  height: 150px;
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.btnContainer {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.newProperty {
+  width: 100%;
+  padding: 20px 10px;
+  background-color: #f4511e;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.newProperty:hover {
+  color: #f4511e;
+  border: 1px solid #bdbdbd;
+  background-color: #fff;
+}
+
+.newProperty:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+input[type="file"] {
+  width: 350px;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid #555;
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #f4511e;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: #eee;
+}
+
+.dropContainer {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #f4511e;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+.dropContainer:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.dropContainer:hover .dropTitle {
+  color: #222;
+}
+
+.dropTitle {
+  color: #444;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+}

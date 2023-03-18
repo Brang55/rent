@@ -1,13 +1,13 @@
 import styles from "./SocialMedia.module.css";
 
-import Fb from "../images/facebook.png";
-import Twitter from "../images/twitter.png";
-import Linkedin from "../images/linkedin1.png";
-import YouTube from "../images/youtube.png";
-import Instagram from "../images/instagram.png";
-import GoogleP from "../images/googleplus.png";
-import Pinterest from "../images/pinterest.png";
-import Rss from "../images/rss.png";
+import Fb from "./images/facebook.png";
+import Twitter from "./images/twitter.png";
+import Linkedin from "./images/linkedin1.png";
+import YouTube from "./images/youtube.png";
+import Instagram from "./images/instagram.png";
+import GoogleP from "./images/googleplus.png";
+import Pinterest from "./images/pinterest.png";
+import Rss from "./images/rss.png";
 
 function SocialMedia() {
   return (

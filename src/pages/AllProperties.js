@@ -1,6 +1,6 @@
-import PropertyList from "../components/PropertyList";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import PropertyList from "../components/Property/PropertyList/PropertyList";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 function AllProperties() {
   return (

@@ -6,11 +6,11 @@ import { AuthContextProvider } from "./context/AuthContext";
 import Home from "./pages/Home";
 import AllProperties from "./pages/AllProperties";
 import MyAccount from "./pages/MyAccount";
-import Login from "./components/register/Login";
+import Login from "./components/Account/Login/Login";
 import { AuthContext } from "./context/AuthContext";
 
 import "./style.css";
-import RegistrationForm from "./components/register/RegistrationForm";
+import RegistrationForm from "./components/Account/Register/RegistrationForm";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
