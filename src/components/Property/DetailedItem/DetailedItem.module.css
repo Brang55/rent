@@ -1,0 +1,64 @@
+.detailedPage * {
+  text-transform: capitalize;
+}
+
+.gallery {
+  float: left;
+  width: 60%;
+}
+
+.gallery li:first-of-type {
+  width: 100%;
+}
+
+.gallery li {
+  float: left;
+  width: 33%;
+}
+
+.gallery li img {
+  width: 100%;
+}
+
+.info {
+  float: left;
+  width: 40%;
+  padding: 30px;
+}
+
+.name {
+  display: block;
+  padding: 0 25px;
+  font-size: 27px;
+}
+
+.city {
+  font-size: 20px;
+}
+
+.square,
+.type,
+.price {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.type {
+  display: block;
+  padding: 0 25px;
+  font-size: 18px;
+  color: #818181;
+}
+
+.price {
+  padding: 0 25px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #f4511e;
+}
+
+.description {
+  float: left;
+  display: block;
+}

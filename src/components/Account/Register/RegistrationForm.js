@@ -15,8 +15,6 @@ function RegistrationForm(e) {
     confirmPassword: "",
   });
 
-  console.log(regDataForm);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRegDataForm((prevData) => ({ ...prevData, [name]: value }));

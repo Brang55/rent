@@ -2,8 +2,13 @@
   margin-right: 0;
 }
 
-.propertyName a {
+.propertyImg {
+  width: 100%;
+}
+
+.propertyName {
   display: block;
+  min-height: 100px;
   padding: 0 25px;
   font-size: 23px;
 }

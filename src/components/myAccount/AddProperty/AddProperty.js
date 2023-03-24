@@ -20,8 +20,6 @@ function AddProperty() {
   const [urls, setUrls] = useState([]);
   const [per, setPer] = useState(null);
 
-  console.log(images);
-
   const handleImageChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
@@ -34,12 +32,18 @@ function AddProperty() {
     const uploadFile = () => {
       images.map((image) => {
         const storageRef = ref(storage, `images/${image.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, images);
+
+        const metadata = {
+          contentType: "image/jpeg",
+        };
+
+        const uploadTask = uploadBytesResumable(storageRef, image, metadata);
         uploadTask.on(
           "state_changed",
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setPer(progress);
             console.log("Upload is " + progress + "% done");
             switch (snapshot.state) {
               case "paused":

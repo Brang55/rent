@@ -1,8 +1,7 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../config/firebase";
-import { AuthContext } from "../../../context/AuthContext";
 
 import styles from "./Login.module.css";
 
@@ -13,8 +12,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const { dispatch } = useContext(AuthContext);
-
   const handleLogin = (e) => {
     e.preventDefault();
     // const auth = getAuth();
@@ -22,8 +19,8 @@ function Login() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch({ type: "LOGIN", payload: user });
         navigate("/");
+        return user;
       })
       .catch((error) => {
         setError(true);
@@ -37,12 +34,14 @@ function Login() {
           <input
             type="email"
             placeholder="Email..."
+            name="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
           <input
             type="password"
             placeholder="Password..."
+            name="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />

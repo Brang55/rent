@@ -1,22 +1,29 @@
-import { createContext, useEffect, useReducer } from "react";
-import AuthReducer from "./AuthReducer";
+import { useEffect, useState, createContext } from "react";
 
-const INITIAL_STATE = {
-  currentUser: JSON.parse(localStorage.getItem("user")) || null,
-};
+import { auth } from "../config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
-export const AuthContext = createContext(INITIAL_STATE);
+export const AuthContext = createContext();
 
-export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
+export const AuthProvider = ({ children }) => {
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(state.currentUser));
-  }, [state.currentUser]);
+    onAuthStateChanged(auth, (data) => {
+      if (data) {
+        setUserData(data);
+      } else {
+        setUserData(null);
+        console.log("User is signed out");
+      }
+    });
+  }, []);
+
+  //   const contextValues = {
+  //     userId: userData.uid,
+  //   };
 
   return (
-    <AuthContext.Provider value={{ currentUser: state.current, dispatch }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ userData }}>{children}</AuthContext.Provider>
   );
 };
