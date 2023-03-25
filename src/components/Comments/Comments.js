@@ -1,8 +1,12 @@
-import styles from "./Comments.module.css";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+
+import { db } from "../../config/firebase";
 
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
+
+import styles from "./Comments.module.css";
 
 function Comments() {
   const { propertyId } = useParams();
@@ -11,25 +15,31 @@ function Comments() {
 
   const [comment, setComment] = useState({
     description: "",
+    userId: userData.uid,
+    propertyId: propertyId,
+    timeStamp: serverTimestamp(),
   });
 
-  const userId = userData.uid;
+  console.log(comment);
 
   const onChangeComment = (e) => {
     const { name, value } = e.target;
     setComment((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onCommentSubmit = (e) => {
+  const onCommentSubmit = async (e) => {
     e.preventDefault();
-    console.log(comment);
+    try {
+      await addDoc(collection(db, "comments"), {
+        ...comment,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
-
-  console.log(propertyId);
 
   return (
     <>
-      <h2>Comments Section</h2>
       <form className={styles.commentForm} onSubmit={onCommentSubmit}>
         <label>
           <textarea

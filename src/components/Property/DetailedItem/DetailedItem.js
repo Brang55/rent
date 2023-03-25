@@ -6,9 +6,9 @@ import { db } from "../../../config/firebase";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
+import CommentList from "../../Comments/CommentList";
 
 import styles from "./DetailedItem.module.css";
-import Comments from "../../Comments/Comments";
 
 function DetailedItem(props) {
   const { propertyId } = useParams();
@@ -69,7 +69,7 @@ function DetailedItem(props) {
               </article>
             );
           })}
-          <Comments />
+          <CommentList />
         </section>
       </main>
       <Footer />
