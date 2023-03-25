@@ -8,6 +8,7 @@ import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 
 import styles from "./DetailedItem.module.css";
+import Comments from "../../Comments/Comments";
 
 function DetailedItem(props) {
   const { propertyId } = useParams();
@@ -34,37 +35,42 @@ function DetailedItem(props) {
     <div>
       <Header />
       <main className="container">
-        {detailedPage.map((detail) => {
-          return (
-            <section className={styles.detailedPage} key={propertyId}>
-              <ul className={styles.gallery}>
-                {detail.urls.map((url) => {
-                  return (
-                    <li key={url}>
-                      <img src={url} alt="text" />
-                    </li>
-                  );
-                })}
-              </ul>
-              <div className={styles.info}>
-                <h3 className={styles.name}>{detail.name}</h3>
-                <h2 className={styles.city}>
-                  {detail.city}, {detail.address}{" "}
-                </h2>
+        <section>
+          {detailedPage.map((detail) => {
+            return (
+              <article className={styles.detailedPage} key={propertyId}>
+                <ul className={styles.gallery}>
+                  {detail.urls.map((url) => {
+                    return (
+                      <li key={url}>
+                        <img src={url} alt="text" />
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div className={styles.info}>
+                  <h3 className={styles.name}>{detail.name}</h3>
+                  <h2 className={styles.city}>
+                    {detail.city}, {detail.address}{" "}
+                  </h2>
 
-                <span
-                  className={styles.square}
-                >{`Square: ${detail.square}`}</span>
-                <span
-                  className={styles.type}
-                >{`Type: ${detail.roomType}`}</span>
-                <span className={styles.price}>{`$${detail.price}/Month`}</span>
-              </div>
+                  <span
+                    className={styles.square}
+                  >{`Square: ${detail.square}`}</span>
+                  <span
+                    className={styles.type}
+                  >{`Type: ${detail.roomType}`}</span>
+                  <span
+                    className={styles.price}
+                  >{`$${detail.price}/Month`}</span>
+                </div>
 
-              <p className={styles.description}>{detail.description}</p>
-            </section>
-          );
-        })}
+                <p className={styles.description}>{detail.description}</p>
+              </article>
+            );
+          })}
+          <Comments />
+        </section>
       </main>
       <Footer />
     </div>
