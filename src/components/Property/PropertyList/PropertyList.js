@@ -37,6 +37,23 @@ function PropertyList() {
         ) : (
           <h2 className={styles.allProperties}>Properties</h2>
         )}
+        <form className={styles.filterForm}>
+          <select name="city" id="city" className={styles.filter}>
+            <option value="sofia">Sofia</option>
+            <option value="plovdiv">Plovdiv</option>
+            <option value="varna">Varna</option>
+            <option value="burgas">Burgas</option>
+          </select>
+          <select
+            name="propertyType"
+            id="propertyType"
+            className={styles.filter}
+          >
+            <option value="house">House</option>
+            <option value="apartment">Apartment</option>
+            <option value="room">Room</option>
+          </select>
+        </form>
         <ul className={styles.propertyItem}>
           {data.map((property) => (
             <PropertyItem key={property.id} {...property} />
