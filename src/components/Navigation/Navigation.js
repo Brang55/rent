@@ -40,7 +40,7 @@ function Navigation() {
         {userData ? (
           <li>
             {" "}
-            <NavLink to="/login">Login</NavLink>{" "}
+            <NavLink to="/logout">Logout</NavLink>{" "}
           </li>
         ) : (
           ""

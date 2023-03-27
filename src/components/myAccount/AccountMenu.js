@@ -4,26 +4,48 @@ import { useState } from "react";
 import MyInformation from "./MyInformation";
 import MyProperties from "../MyProperties";
 
-function AccountMenu(props) {
-  const [show, setShow] = useState(1);
+import { Link, useLocation } from "react-router-dom";
 
-  function showHandler(index) {
-    setShow(index);
-  }
+function AccountMenu(props) {
+  const myAccLocation = useLocation();
+  // const [show, setShow] = useState(1);
+
+  // function showHandler(index) {
+  //   setShow(index);
+  // }
+
   return (
     <div className="container">
       <ul className={styles.personalMenu}>
         <li>
-          <button
-            onClick={() => showHandler(1)}
-            className={`${show === 1 && styles.activeItem} ${
-              styles.personalMenuItem
-            }`}
-          >
-            Add New Property
-          </button>
+          {myAccLocation.pathname === "/my-account/add-property" ||
+          myAccLocation.pathname === "/my-account" ? (
+            <span className={styles.activeItem}>Add New Property</span>
+          ) : (
+            <Link to="/my-account/add-property">
+              <span className={styles.personalMenuItem}>Add New Property</span>
+            </Link>
+          )}
         </li>
         <li>
+          {myAccLocation.pathname === "/my-account/my-information" ? (
+            <span className={styles.activeItem}>My Information</span>
+          ) : (
+            <Link to="/my-account/my-information">
+              <span className={styles.personalMenuItem}>My Information</span>
+            </Link>
+          )}
+        </li>
+        <li>
+          {myAccLocation.pathname === "/my-account/my-properties" ? (
+            <span className={styles.activeItem}>My Properties</span>
+          ) : (
+            <Link to="/my-account/my-properties">
+              <span className={styles.personalMenuItem}>My Properties</span>
+            </Link>
+          )}
+        </li>
+        {/* <li>
           <button
             onClick={() => showHandler(2)}
             className={`${show === 2 && styles.activeItem} ${
@@ -52,13 +74,13 @@ function AccountMenu(props) {
           >
             My Properties
           </button>
-        </li>
+        </li> */}
       </ul>
-      <div className={styles.settingHolder}>
+      {/* <div className={styles.settingHolder}>
         {show === 1 && <AddProperty />}
         {show === 2 && <MyInformation />}
         {show === 4 && <MyProperties />}
-      </div>
+      </div> */}
     </div>
   );
 }
