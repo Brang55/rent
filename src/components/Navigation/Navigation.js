@@ -9,6 +9,8 @@ import Logo from "./images/logo.png";
 function Navigation() {
   const { userData } = useContext(AuthContext);
 
+  const userId = userData.uid;
+
   return (
     <nav className={styles.navHeader}>
       <ul>
@@ -21,7 +23,7 @@ function Navigation() {
         <li>
           <NavLink to="/properties">Properties</NavLink>
         </li>
-        {userData ? (
+        {userId ? (
           <li>
             {" "}
             <NavLink to="/my-account">My Account</NavLink>{" "}
@@ -29,7 +31,7 @@ function Navigation() {
         ) : (
           ""
         )}
-        {!userData ? (
+        {!userId ? (
           <li>
             {" "}
             <NavLink to="/login">Login</NavLink>{" "}
@@ -37,7 +39,7 @@ function Navigation() {
         ) : (
           ""
         )}
-        {userData ? (
+        {userId ? (
           <li>
             {" "}
             <NavLink to="/logout">Logout</NavLink>{" "}
@@ -45,7 +47,7 @@ function Navigation() {
         ) : (
           ""
         )}
-        {!userData ? (
+        {!userId ? (
           <li>
             {" "}
             <NavLink to="/register">Register</NavLink>{" "}

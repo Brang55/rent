@@ -24,8 +24,6 @@ function App() {
     return userData ? children : <Navigate to="/login" />;
   };
 
-  console.log(userData);
-
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

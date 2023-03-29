@@ -13,8 +13,6 @@ function CommentList() {
 
   const [comment, setComment] = useState([]);
 
-  console.log(comment);
-
   useEffect(() => {
     const loadComments = async () => {
       const listComments = [];

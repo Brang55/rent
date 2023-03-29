@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       if (data) {
         setUserData(data);
       } else {
-        setUserData(null);
+        setUserData({});
         console.log("User is signed out");
       }
     });

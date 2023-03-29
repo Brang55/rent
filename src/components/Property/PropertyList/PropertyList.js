@@ -40,7 +40,7 @@ function PropertyList() {
       <main>
         <section className={styles.properties}>
           <div className="container">
-            {location.pathname === "/" ? (
+            {/* {location.pathname === "/" ? (
               <HomeProperties />
             ) : (
               <h2 className={styles.allProperties}>Properties</h2>
@@ -64,7 +64,7 @@ function PropertyList() {
                   <option value="room">Room</option>
                 </select>
               </form>
-            )}
+            )} */}
             <ul className={styles.propertyItem}>
               {data.map((property) => (
                 <PropertyItem key={property.id} {...property} />

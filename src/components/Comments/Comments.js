@@ -15,12 +15,9 @@ function Comments() {
 
   const [comment, setComment] = useState({
     description: "",
-    userId: userData.uid,
     propertyId: propertyId,
     timeStamp: serverTimestamp(),
   });
-
-  console.log(comment);
 
   const onChangeComment = (e) => {
     const { name, value } = e.target;
