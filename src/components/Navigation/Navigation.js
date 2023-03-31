@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+
+import { useAuthContext } from "../../context/AuthContext";
 
 import styles from "./Navigation.module.css";
 
 import Logo from "./images/logo.png";
 
 function Navigation() {
-  const { userData } = useContext(AuthContext);
-
-  const userId = userData.uid;
+  const { userId } = useAuthContext();
 
   return (
     <nav className={styles.navHeader}>

@@ -4,12 +4,14 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 import { db, storage } from "../../../config/firebase";
 import styles from "./AddProperty.module.css";
-import AccountMenu from "../AccountMenu";
+import AccountMenu from "../AccountMenu/AccountMenu";
 import Footer from "../../Footer/Footer";
 import Header from "../../Header/Header";
 import { useLocation } from "react-router-dom";
+import { useAuthContext } from "../../../context/AuthContext";
 
 function AddProperty() {
+  const { userId } = useAuthContext();
   const accLocation = useLocation();
   const [propertyData, setPropertyData] = useState({
     name: "",
@@ -87,6 +89,7 @@ function AddProperty() {
       await addDoc(collection(db, "properties"), {
         ...propertyData,
         urls,
+        userId: userId,
         timeStamp: serverTimestamp(),
       });
     } catch (err) {

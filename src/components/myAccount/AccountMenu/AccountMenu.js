@@ -1,8 +1,8 @@
 import styles from "./AccountMenu.module.css";
-import AddProperty from "./AddProperty/AddProperty";
+import AddProperty from "../AddProperty/AddProperty";
 import { useState } from "react";
-import MyInformation from "./MyInformation";
-import MyProperties from "../MyProperties";
+import MyInformation from "../MyInformation/MyInformation";
+import MyProperties from "../MyInformation/MyProperties";
 
 import { Link, useLocation } from "react-router-dom";
 

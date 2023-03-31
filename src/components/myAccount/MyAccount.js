@@ -1,4 +1,4 @@
-import AccountMenu from "./AccountMenu";
+import AccountMenu from "./AccountMenu/AccountMenu";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import AddProperty from "./AddProperty/AddProperty";

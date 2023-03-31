@@ -9,9 +9,12 @@ import Footer from "../../Footer/Footer";
 import CommentList from "../../Comments/CommentList";
 
 import styles from "./DetailedItem.module.css";
+import { useAuthContext } from "../../../context/AuthContext";
 
 function DetailedItem(props) {
   const { propertyId } = useParams();
+
+  const { userId, isAuthenticated } = useAuthContext();
 
   const [detailedPage, setDetailedPage] = useState([]);
 
