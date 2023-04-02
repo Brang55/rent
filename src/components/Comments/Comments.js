@@ -2,8 +2,8 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 import { db } from "../../config/firebase";
 
-import { AuthContext } from "../../context/AuthContext";
-import { useContext, useState } from "react";
+import { useAuthContext } from "../../context/AuthContext";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import styles from "./Comments.module.css";
@@ -11,7 +11,7 @@ import styles from "./Comments.module.css";
 function Comments() {
   const { propertyId } = useParams();
 
-  const { userData } = useContext(AuthContext);
+  const { userId, isAuthenticated } = useAuthContext();
 
   const [comment, setComment] = useState({
     description: "",
@@ -29,6 +29,7 @@ function Comments() {
     try {
       await addDoc(collection(db, "comments"), {
         ...comment,
+        userId: userId,
       });
     } catch (err) {
       console.log(err);
@@ -37,22 +38,24 @@ function Comments() {
 
   return (
     <>
-      <form className={styles.commentForm} onSubmit={onCommentSubmit}>
-        <label>
-          <textarea
-            className={styles.commentArea}
-            placeholder="Leave your comment here..."
-            name="description"
-            value={comment.description}
-            onChange={onChangeComment}
-          ></textarea>
-          <input
-            className={styles.commentSubmit}
-            type="submit"
-            value="Submit Comment"
-          />
-        </label>
-      </form>
+      {!!isAuthenticated && (
+        <form className={styles.commentForm} onSubmit={onCommentSubmit}>
+          <label>
+            <textarea
+              className={styles.commentArea}
+              placeholder="Leave your comment here..."
+              name="description"
+              value={comment.description}
+              onChange={onChangeComment}
+            ></textarea>
+            <input
+              className={styles.commentSubmit}
+              type="submit"
+              value="Submit Comment"
+            />
+          </label>
+        </form>
+      )}
     </>
   );
 }

@@ -8,6 +8,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 
 import AccountMenu from "../AccountMenu/AccountMenu";
 
+import styles from "./MyInformation.module.css";
+
 import classes from "../../Property/PropertyItem/PropertyItem.module.css";
 import propClass from "../../Property/PropertyList/PropertyList.module.css";
 
@@ -19,9 +21,12 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../../context/AuthContext";
 
 function MyProperties() {
+  // const { propertyId } = useParams();
+
   const myPropLocation = useLocation();
   const { userId } = useAuthContext();
   const [userProperties, setUserProperties] = useState([]);
+  console.log(userProperties);
 
   useEffect(() => {
     const getUserProperties = async () => {
@@ -29,16 +34,17 @@ function MyProperties() {
         collection(db, "properties"),
         where("userId", "==", userId)
       );
-
+      const list = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
+        list.push({ id: doc.id, ...doc.data() });
         // doc.data() is never undefined for query doc snapshots
-        setUserProperties((prevState) => [...prevState, doc.data()]);
+        setUserProperties(list);
       });
     };
 
     getUserProperties();
-  }, []);
+  }, [userId]);
 
   return (
     <>
@@ -50,14 +56,14 @@ function MyProperties() {
             <ul className={propClass.propertyItem}>
               {userProperties.map((x) => {
                 return (
-                  <li key={x.userId}>
+                  <li key={x.id}>
                     <img
                       src={x.urls[0]}
                       alt="test"
                       className={classes.propertyImg}
                     />
 
-                    <Link to={`${x.id}`}>
+                    <Link to={`/${x.id}/preview`}>
                       <h2 className={classes.propertyName}>
                         {x.name}, {x.address}
                       </h2>
@@ -79,8 +85,23 @@ function MyProperties() {
                         <img src={Size} alt="" />2
                       </span>
                     </div>
-                    <Link to={`/${x.id}/edit`}>Edit</Link>
-                    <Link to={`/${x.id}/preview`}>Preview</Link>
+                    <ul className={styles.buttonHolder}>
+                      <li>
+                        <Link to={`${x.userId}/edit`}>
+                          <span className={styles.propertyButton}>Edit</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`/${x.id}/preview`}>
+                          <span className={styles.propertyButton}>Preview</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`${x.userId}/preview`}>
+                          <span className={styles.propertyButton}>Delete</span>
+                        </Link>
+                      </li>
+                    </ul>
                   </li>
                 );
               })}

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { doc, getDoc } from "firebase/firestore";
@@ -9,12 +9,9 @@ import Footer from "../../Footer/Footer";
 import CommentList from "../../Comments/CommentList";
 
 import styles from "./DetailedItem.module.css";
-import { useAuthContext } from "../../../context/AuthContext";
 
 function DetailedItem(props) {
   const { propertyId } = useParams();
-
-  const { userId, isAuthenticated } = useAuthContext();
 
   const [detailedPage, setDetailedPage] = useState([]);
 
@@ -34,11 +31,20 @@ function DetailedItem(props) {
     getItem();
   }, [propertyId]);
 
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div>
       <Header />
       <main className="container">
-        <section>
+        <section className={styles.detailedSection}>
+          <button className={styles.backBtn} onClick={goBack}>
+            Back
+          </button>
           {detailedPage.map((detail) => {
             return (
               <article className={styles.detailedPage} key={propertyId}>

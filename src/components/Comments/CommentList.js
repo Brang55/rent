@@ -1,15 +1,14 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { AuthContext } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import { useParams } from "react-router-dom";
 import { db } from "../../config/firebase";
 import Comments from "./Comments";
 
 function CommentList() {
-  const { userData } = useContext(AuthContext);
-
   const { propertyId } = useParams();
+  const { userId, isAuthenticated } = useAuthContext();
 
   const [comment, setComment] = useState([]);
 

@@ -1,0 +1,40 @@
+.propertyButton {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 5px;
+  background-color: #f4511e;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.propertyButton:hover {
+  color: #f4511e;
+  border: 1px solid #bdbdbd;
+  background-color: #fff;
+}
+
+.propertyButton:nth-last-of-type(3) {
+  margin-right: 0 !important;
+}
+
+.buttonHolder {
+  float: left;
+  width: 100%;
+  padding: 40px 10px 20px 10px;
+  border-top: 1px solid #e4e4e4;
+}
+
+.buttonHolder li {
+  width: 32%;
+  margin-right: 2%;
+  margin-bottom: 0;
+}
+
+.buttonHolder li:last-of-type {
+  margin-right: 0;
+}
