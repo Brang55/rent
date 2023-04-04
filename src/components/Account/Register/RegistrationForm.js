@@ -4,8 +4,11 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 import React, { useState } from "react";
 import styles from "./RegistrationForm.module.css";
+import { useNavigate } from "react-router-dom";
 
-function RegistrationForm(e) {
+function RegistrationForm() {
+  const navigate = useNavigate();
+
   const [regDataForm, setRegDataForm] = useState({
     firstName: "",
     lastName: "",
@@ -33,6 +36,7 @@ function RegistrationForm(e) {
         ...regDataForm,
         timeStamp: serverTimestamp(),
       });
+      navigate("/");
     } catch (err) {
       console.log(err);
     }

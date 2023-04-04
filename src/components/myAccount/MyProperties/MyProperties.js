@@ -4,11 +4,18 @@ import { db } from "../../../config/firebase";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 
-import { collection, query, where, getDocs } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
 import AccountMenu from "../AccountMenu/AccountMenu";
 
-import styles from "./MyInformation.module.css";
+import styles from "../MyInformation/MyInformation.module.css";
 
 import classes from "../../Property/PropertyItem/PropertyItem.module.css";
 import propClass from "../../Property/PropertyList/PropertyList.module.css";
@@ -26,7 +33,6 @@ function MyProperties() {
   const myPropLocation = useLocation();
   const { userId } = useAuthContext();
   const [userProperties, setUserProperties] = useState([]);
-  console.log(userProperties);
 
   useEffect(() => {
     const getUserProperties = async () => {
@@ -45,6 +51,11 @@ function MyProperties() {
 
     getUserProperties();
   }, [userId]);
+
+  const deleteProperty = async (itemId) => {
+    await deleteDoc(doc(db, "properties", itemId));
+    setUserProperties(userProperties.filter((x) => x.id !== itemId));
+  };
 
   return (
     <>
@@ -87,7 +98,7 @@ function MyProperties() {
                     </div>
                     <ul className={styles.buttonHolder}>
                       <li>
-                        <Link to={`${x.userId}/edit`}>
+                        <Link to={`/my-account/my-properties/${x.id}/edit`}>
                           <span className={styles.propertyButton}>Edit</span>
                         </Link>
                       </li>
@@ -97,15 +108,21 @@ function MyProperties() {
                         </Link>
                       </li>
                       <li>
-                        <Link to={`${x.userId}/preview`}>
-                          <span className={styles.propertyButton}>Delete</span>
-                        </Link>
+                        <button
+                          className={styles.propertyButton}
+                          onClick={() => deleteProperty(x.id)}
+                        >
+                          Delete
+                        </button>
                       </li>
                     </ul>
                   </li>
                 );
               })}
             </ul>
+            {userProperties.length <= 0 && (
+              <span>You dont have any Properties added yet</span>
+            )}
           </div>
         </section>
       </main>

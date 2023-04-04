@@ -13,11 +13,12 @@ import RegistrationForm from "./components/Account/Register/RegistrationForm";
 import DetailedItem from "./components/Property/DetailedItem/DetailedItem";
 import AddProperty from "./components/myAccount/AddProperty/AddProperty";
 import MyInformation from "./components/myAccount/MyInformation/MyInformation";
-import MyProperties from "./components/myAccount/MyInformation/MyProperties";
+import MyProperties from "./components/myAccount/MyProperties/MyProperties";
 import PropertyList from "./components/Property/PropertyList/PropertyList";
 import { RouteGuard } from "./components/Routes/RouterGuard";
 
 import ScrollToTop from "./components/Routes/ScrollToTop";
+import EditProperty from "./components/Property/EditProperty/EditProperty";
 
 function App() {
   return (
@@ -36,6 +37,10 @@ function App() {
             element={<MyInformation />}
           />
           <Route path="/my-account/my-properties" element={<MyProperties />} />
+          <Route
+            path="/my-account/my-properties/:propertyId/edit"
+            element={<EditProperty />}
+          />
         </Route>
 
         <Route path="/register" element={<RegistrationForm />} />

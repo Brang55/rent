@@ -1,8 +1,4 @@
 import styles from "./AccountMenu.module.css";
-import AddProperty from "../AddProperty/AddProperty";
-import { useState } from "react";
-import MyInformation from "../MyInformation/MyInformation";
-import MyProperties from "../MyInformation/MyProperties";
 
 import { Link, useLocation } from "react-router-dom";
 
@@ -45,42 +41,7 @@ function AccountMenu(props) {
             </Link>
           )}
         </li>
-        {/* <li>
-          <button
-            onClick={() => showHandler(2)}
-            className={`${show === 2 && styles.activeItem} ${
-              styles.personalMenuItem
-            }`}
-          >
-            My Information
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => showHandler(3)}
-            className={`${show === 3 && styles.activeItem} ${
-              styles.personalMenuItem
-            }`}
-          >
-            Settings
-          </button>
-        </li>
-        <li>
-          <button
-            onClick={() => showHandler(4)}
-            className={`${show === 4 && styles.activeItem} ${
-              styles.personalMenuItem
-            }`}
-          >
-            My Properties
-          </button>
-        </li> */}
       </ul>
-      {/* <div className={styles.settingHolder}>
-        {show === 1 && <AddProperty />}
-        {show === 2 && <MyInformation />}
-        {show === 4 && <MyProperties />}
-      </div> */}
     </div>
   );
 }
