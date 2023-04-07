@@ -16,20 +16,3 @@
   width: 30%;
   color: #f4511e;
 }
-
-.viewAll {
-  float: right;
-  padding: 20px 30px;
-  margin-right: 50px;
-  font-size: 17px;
-  color: #fff;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  background-color: #f4511e;
-}
-
-.viewAll:hover {
-  color: #f4511e;
-  background-color: #fff;
-  border: 1px solid #bdbdbd;
-}

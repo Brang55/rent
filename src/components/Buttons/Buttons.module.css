@@ -1,0 +1,43 @@
+.btn,
+.submitBtn,
+.backBtn {
+  float: right;
+  padding: 20px 30px;
+  margin-right: 50px;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background-color: #f4511e;
+  cursor: pointer;
+}
+
+.btn:hover,
+.submitBtn:hover,
+.backBtn {
+  color: #f4511e;
+  background-color: #fff;
+  border: 1px solid #bdbdbd;
+}
+
+.submitBtn {
+  float: none;
+  margin-top: 20px;
+  width: 100%;
+  margin-right: 0;
+}
+
+.backBtn {
+  float: none;
+  display: inline-block;
+  width: 10%;
+  padding: 10px 5px;
+  background-color: #f4511e;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}

@@ -66,23 +66,3 @@
   float: left;
   display: block;
 }
-
-.backBtn {
-  display: inline-block;
-  width: 10%;
-  padding: 10px 5px;
-  background-color: #f4511e;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.backBtn:hover {
-  color: #f4511e;
-  border: 1px solid #bdbdbd;
-  background-color: #fff;
-}

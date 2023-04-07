@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styles from "./Roommate.module.css";
 
@@ -6,9 +6,9 @@ import Flex1 from "./images/flex1.png";
 import Flex2 from "./images/flex2.png";
 import Flex3 from "./images/flex3.png";
 import Flex4 from "./images/flex4.png";
+import { GoTo } from "../Buttons/Buttons";
 
 function Roommate() {
-  const navigate = useNavigate();
   return (
     <section className={styles.roommateSection}>
       <div className="container">
@@ -38,12 +38,10 @@ function Roommate() {
             selective roommate finder option. We provide you the flexibility
             that you most desire.
           </p>
-          <button
-            onClick={() => navigate("properties")}
-            className={styles.viewAll}
-          >
-            Search Rooms
-          </button>
+
+          <Link to="/properties">
+            <GoTo />
+          </Link>
         </div>
       </div>
     </section>

@@ -12,6 +12,7 @@ import { useState } from "react";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
+import { RegisterButton } from "../../Buttons/Buttons";
 
 function RegistrationForm() {
   const navigate = useNavigate();
@@ -147,9 +148,10 @@ function RegistrationForm() {
               )}
             </div>
           </div>
-          <button type="submit" className={styles.regButton}>
+          <RegisterButton />
+          {/* <button type="submit" className={styles.regButton}>
             Register
-          </button>
+          </button> */}
         </form>
       </main>
       <Footer />

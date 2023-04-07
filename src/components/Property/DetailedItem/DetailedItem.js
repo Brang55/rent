@@ -9,6 +9,7 @@ import Footer from "../../Footer/Footer";
 import CommentList from "../../Comments/CommentList";
 
 import styles from "./DetailedItem.module.css";
+import { BackButton } from "../../Buttons/Buttons";
 
 function DetailedItem(props) {
   const { propertyId } = useParams();
@@ -31,20 +32,12 @@ function DetailedItem(props) {
     getItem();
   }, [propertyId]);
 
-  const navigate = useNavigate();
-
-  const goBack = () => {
-    navigate(-1);
-  };
-
   return (
     <div>
       <Header />
       <main className="container">
         <section className={styles.detailedSection}>
-          <button className={styles.backBtn} onClick={goBack}>
-            Back
-          </button>
+          <BackButton />
           {detailedPage.map((detail) => {
             return (
               <article className={styles.detailedPage} key={propertyId}>

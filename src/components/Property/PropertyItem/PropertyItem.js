@@ -21,7 +21,7 @@ function Property({
 }) {
   return (
     <li>
-      <img src={urls[0]} alt={urls} className={styles.propertyImg} />
+      <img src={urls[0]} alt="Upload Screen" className={styles.propertyImg} />
 
       <Link to={`${id}`}>
         <h2 className={styles.propertyName}>

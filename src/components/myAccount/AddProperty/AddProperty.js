@@ -176,6 +176,9 @@ function AddProperty() {
                   value={values.city}
                   onChange={changeHandler}
                 >
+                  <option value="select" selected="selected">
+                    ----
+                  </option>
                   <option value="sofia">Sofia</option>
                   <option value="plovdiv">Plovdiv</option>
                   <option value="varna">Varna</option>
@@ -195,6 +198,9 @@ function AddProperty() {
                   value={values.roomType}
                   onChange={changeHandler}
                 >
+                  <option value="select" selected="selected">
+                    ----
+                  </option>
                   <option value="private-room">Private Room</option>
                   <option value="apartment">Apartment</option>
                   <option value="house">House</option>

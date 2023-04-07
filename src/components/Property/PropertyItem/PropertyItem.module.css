@@ -3,6 +3,7 @@
 }
 
 .propertyImg {
+  display: block;
   width: 360px;
   height: 250px;
 }

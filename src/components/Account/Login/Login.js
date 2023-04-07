@@ -8,6 +8,7 @@ import { useForm } from "../../../hooks/useForm";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
+import { LoginButton } from "../../Buttons/Buttons";
 
 function Login() {
   const navigate = useNavigate();
@@ -54,10 +55,7 @@ function Login() {
               onChange={changeHandler}
               value={values.password}
             />
-            <button className={styles.loginBtn} type="submit">
-              {" "}
-              Login
-            </button>
+            <LoginButton />
             {error && <span>Wrong email or password!</span>}
           </div>
           <span>
