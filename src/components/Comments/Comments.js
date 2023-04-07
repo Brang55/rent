@@ -1,63 +1,72 @@
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+// import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-import { db } from "../../config/firebase";
+// import { db } from "../../config/firebase";
 
-import { useAuthContext } from "../../context/AuthContext";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useAuthContext } from "../../context/AuthContext";
+// import { useReducer, useState } from "react";
+// import { useParams } from "react-router-dom";
 
-import styles from "./Comments.module.css";
+// import { commentReducer } from "../../reducers/commentReducer";
 
-function Comments() {
-  const { propertyId } = useParams();
+// import styles from "./Comments.module.css";
 
-  const { userId, isAuthenticated } = useAuthContext();
+// function Comments() {
+//   const { propertyId } = useParams();
+//   const { userId, isAuthenticated, email } = useAuthContext();
 
-  const [comment, setComment] = useState({
-    description: "",
-    propertyId: propertyId,
-    timeStamp: serverTimestamp(),
-  });
+//   const [newComment, dispatch] = useReducer(commentReducer, {});
 
-  const onChangeComment = (e) => {
-    const { name, value } = e.target;
-    setComment((prevState) => ({ ...prevState, [name]: value }));
-  };
+//   const [comment, setComment] = useState({
+//     description: "",
+//     propertyId: propertyId,
+//     userId: userId,
+//     userEmail: email,
+//     timeStamp: serverTimestamp(),
+//   });
 
-  const onCommentSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await addDoc(collection(db, "comments"), {
-        ...comment,
-        userId: userId,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+//   const onChangeComment = (e) => {
+//     const { name, value } = e.target;
+//     setComment((prevState) => ({ ...prevState, [name]: value }));
+//   };
 
-  return (
-    <>
-      {!!isAuthenticated && (
-        <form className={styles.commentForm} onSubmit={onCommentSubmit}>
-          <label>
-            <textarea
-              className={styles.commentArea}
-              placeholder="Leave your comment here..."
-              name="description"
-              value={comment.description}
-              onChange={onChangeComment}
-            ></textarea>
-            <input
-              className={styles.commentSubmit}
-              type="submit"
-              value="Submit Comment"
-            />
-          </label>
-        </form>
-      )}
-    </>
-  );
-}
+//   const onCommentSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await addDoc(collection(db, "comments"), {
+//         ...comment,
+//       });
 
-export default Comments;
+//       dispatch({
+//         type: "COMMENT_ADD",
+//         payload: response,
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+
+//   return (
+//     <>
+//       {!!isAuthenticated && (
+//         <form className={styles.commentForm} onSubmit={onCommentSubmit}>
+//           <label>
+//             <textarea
+//               className={styles.commentArea}
+//               placeholder="Leave your comment here..."
+//               name="description"
+//               value={comment.description}
+//               onChange={onChangeComment}
+//             ></textarea>
+//             <input
+//               className={styles.commentSubmit}
+//               type="submit"
+//               value="Submit Comment"
+//             />
+//           </label>
+//         </form>
+//       )}
+//     </>
+//   );
+// }
+
+// export default Comments;

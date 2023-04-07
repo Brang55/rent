@@ -56,3 +56,12 @@
   margin: 0 0 20px 0;
   text-align: center;
 }
+
+.invalid {
+  display: block;
+  width: 79%;
+  margin: 0 auto;
+  font-size: 15px;
+  text-align: center;
+  color: rgb(255, 0, 0);
+}

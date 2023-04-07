@@ -4,18 +4,25 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 
 import styles from "./Login.module.css";
+import { useForm } from "../../../hooks/useForm";
+
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
 
 function Login() {
-  const [error, setError] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
+
+  const [error, setError] = useState(false);
+
+  const { values, changeHandler } = useForm({
+    email: "",
+    password: "",
+  });
 
   const handleLogin = (e) => {
     e.preventDefault();
     // const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, values.email, values.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
@@ -29,29 +36,36 @@ function Login() {
 
   return (
     <>
-      <form onSubmit={handleLogin} className={styles.loginForm}>
-        <div className={styles.loginHolder}>
-          <input
-            type="email"
-            placeholder="Email..."
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-          />
-          <input
-            type="password"
-            placeholder="Password..."
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-          />
-          <button className={styles.loginBtn}> Login</button>
-          {error && <span>Wrong email or password!</span>}
-        </div>
-        <span>
-          You don't have an account? <Link to="/register">Register Now</Link>
-        </span>
-      </form>
+      <Header />
+      <main>
+        <form onSubmit={handleLogin} className={styles.loginForm}>
+          <div className={styles.loginHolder}>
+            <input
+              type="email"
+              placeholder="Email..."
+              name="email"
+              onChange={changeHandler}
+              value={values.email}
+            />
+            <input
+              type="password"
+              placeholder="Password..."
+              name="password"
+              onChange={changeHandler}
+              value={values.password}
+            />
+            <button className={styles.loginBtn} type="submit">
+              {" "}
+              Login
+            </button>
+            {error && <span>Wrong email or password!</span>}
+          </div>
+          <span>
+            You don't have an account? <Link to="/register">Register Now</Link>
+          </span>
+        </form>
+      </main>
+      <Footer />
     </>
   );
 }

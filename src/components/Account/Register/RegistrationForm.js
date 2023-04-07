@@ -2,137 +2,158 @@ import { auth, db } from "../../../config/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
-import React, { useState } from "react";
+import { validateRegister } from "./ValidateRegister";
+
 import styles from "./RegistrationForm.module.css";
 import { useNavigate } from "react-router-dom";
+
+import { useForm } from "../../../hooks/useForm";
+import { useState } from "react";
+
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
 
 function RegistrationForm() {
   const navigate = useNavigate();
 
-  const [regDataForm, setRegDataForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    address: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setRegDataForm((prevData) => ({ ...prevData, [name]: value }));
-  };
+  const { values, changeHandler } = useForm(
+    {
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validateRegister
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await createUserWithEmailAndPassword(
-        auth,
-        regDataForm.email,
-        regDataForm.password
-      );
-
-      await setDoc(doc(db, "users", res.user.uid), {
-        ...regDataForm,
-        timeStamp: serverTimestamp(),
-      });
-      navigate("/");
-    } catch (err) {
-      console.log(err);
+    const errors = validateRegister(values);
+    setErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      try {
+        const res = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        await setDoc(doc(db, "users", res.user.uid), {
+          ...values,
+          timeStamp: serverTimestamp(),
+        });
+        navigate("/");
+        setIsSubmitting(true);
+      } catch (err) {
+        console.log(err);
+      }
     }
-    // setError("");
-
-    // setRegDataForm("");
   };
 
-  // const validatePassword = () => {
-  //   let isValid = true;
-  //   if (regDataForm.password !== "" && regDataForm.confirmPassword !== "") {
-  //     if (regDataForm.password !== regDataForm.confirmPassword) {
-  //       isValid = false;
-  //       // setError("Passwords does not match");
-  //     }
-  //   }
-  //   return isValid;
-  // };
-
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <div className={styles.formBody}>
-        <h3 className={styles.formHeading}>Create Account</h3>
-        <div className={styles.addPropInput}>
-          <label className={styles.formLabel} htmlFor="firstName">
-            First Name:
-          </label>
-          <input
-            className={styles.formInput}
-            type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="First Name"
-            value={regDataForm.firstName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.addPropInput}>
-          <label className={styles.formLabel} htmlFor="lastName">
-            Last Name:
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            className={styles.formInput}
-            placeholder="LastName"
-            value={regDataForm.lastName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.addPropInput}>
-          <label className={styles.formLabel} htmlFor="email">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className={styles.formInput}
-            placeholder="Email"
-            value={regDataForm.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.addPropInput}>
-          <label className={styles.formLabel} htmlFor="password">
-            Password:
-          </label>
-          <input
-            className={styles.formInput}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            value={regDataForm.password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className={styles.addPropInput}>
-          <label className={styles.formLabel} htmlFor="confirmPassword">
-            Confirm Password:
-          </label>
-          <input
-            className={styles.formInput}
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={regDataForm.confirmPassword}
-            onChange={handleInputChange}
-          />
-        </div>
-      </div>
-      <button className={styles.regButton}>Register</button>
-    </form>
+    <>
+      <Header />
+      <main>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.formBody}>
+            <h3 className={styles.formHeading}>Create Account</h3>
+            <div className={styles.addPropInput}>
+              <label className={styles.formLabel} htmlFor="firstName">
+                First Name:
+              </label>
+              <input
+                className={styles.formInput}
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="First Name"
+                value={values.firstName}
+                onChange={changeHandler}
+              />
+              {errors.firstName && (
+                <span className={styles.invalid}>{errors.firstName}</span>
+              )}
+            </div>
+            <div className={styles.addPropInput}>
+              <label className={styles.formLabel} htmlFor="lastName">
+                Last Name:
+              </label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                className={styles.formInput}
+                placeholder="LastName"
+                value={values.lastName}
+                onChange={changeHandler}
+              />
+              {errors.lastName && (
+                <span className={styles.invalid}>{errors.lastName}</span>
+              )}
+            </div>
+            <div className={styles.addPropInput}>
+              <label className={styles.formLabel} htmlFor="email">
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className={styles.formInput}
+                placeholder="Email"
+                value={values.email}
+                onChange={changeHandler}
+              />
+              {errors.email && (
+                <span className={styles.invalid}>{errors.email}</span>
+              )}
+            </div>
+            <div className={styles.addPropInput}>
+              <label className={styles.formLabel} htmlFor="password">
+                Password:
+              </label>
+              <input
+                className={styles.formInput}
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value={values.password}
+                onChange={changeHandler}
+              />
+              {errors.password && (
+                <span className={styles.invalid}>{errors.password}</span>
+              )}
+            </div>
+            <div className={styles.addPropInput}>
+              <label className={styles.formLabel} htmlFor="confirmPassword">
+                Confirm Password:
+              </label>
+              <input
+                className={styles.formInput}
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={values.confirmPassword}
+                onChange={changeHandler}
+              />
+              {errors.confirmPassword && (
+                <span className={styles.invalid}>{errors.confirmPassword}</span>
+              )}
+            </div>
+          </div>
+          <button type="submit" className={styles.regButton}>
+            Register
+          </button>
+        </form>
+      </main>
+      <Footer />
+    </>
   );
 }
 export default RegistrationForm;

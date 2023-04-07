@@ -7,21 +7,30 @@ import styles from "./AddProperty.module.css";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import Footer from "../../Footer/Footer";
 import Header from "../../Header/Header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
+import { useForm } from "../../../hooks/useForm";
+import { validateAddProperty } from "./ValidateAddProperty";
 
 function AddProperty() {
   const { userId } = useAuthContext();
   const accLocation = useLocation();
-  const [propertyData, setPropertyData] = useState({
-    name: "",
-    address: "",
-    square: "",
-    city: "",
-    roomType: "",
-    price: "",
-    description: "",
-  });
+
+  const navigate = useNavigate();
+
+  const [errors, setErrors] = useState({});
+  const { values, changeHandler } = useForm(
+    {
+      name: "",
+      address: "",
+      square: "",
+      city: "",
+      roomType: "",
+      price: "",
+      description: "",
+    },
+    validateAddProperty
+  );
 
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
@@ -78,33 +87,23 @@ function AddProperty() {
     if (images.length > 0) uploadFile();
   }, [images, setUrls]);
 
-  const onChangePropertyData = (e) => {
-    const { name, value } = e.target;
-    setPropertyData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
   const addPropertySubmit = async (e) => {
     e.preventDefault();
-    try {
-      await addDoc(collection(db, "properties"), {
-        ...propertyData,
-        urls,
-        userId: userId,
-        timeStamp: serverTimestamp(),
-      });
-    } catch (err) {
-      console.log(err);
+    const errors = validateAddProperty(values);
+    setErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      try {
+        await addDoc(collection(db, "properties"), {
+          ...values,
+          urls,
+          userId: userId,
+          timeStamp: serverTimestamp(),
+        });
+        navigate("/my-account/my-properties");
+      } catch (err) {
+        console.log(err);
+      }
     }
-    setPropertyData({
-      name: "",
-      address: "",
-      square: "",
-      city: "",
-      roomType: "",
-      price: "",
-      description: "",
-    });
-    e.target.files = null;
   };
 
   return (
@@ -127,10 +126,13 @@ function AddProperty() {
                   type="text"
                   id="name"
                   placeholder="Enter Name"
-                  value={propertyData.name}
+                  value={values.name}
                   name="name"
-                  onChange={onChangePropertyData}
+                  onChange={changeHandler}
                 />
+                {errors.name && (
+                  <span className={styles.invalid}>{errors.name}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="address">
@@ -140,10 +142,13 @@ function AddProperty() {
                   type="text"
                   id="address"
                   placeholder="Enter Address"
-                  value={propertyData.address}
+                  value={values.address}
                   name="address"
-                  onChange={onChangePropertyData}
+                  onChange={changeHandler}
                 />
+                {errors.address && (
+                  <span className={styles.invalid}>{errors.address}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="square">
@@ -153,10 +158,13 @@ function AddProperty() {
                   type="text"
                   id="square"
                   placeholder="Enter Square"
-                  value={propertyData.square}
+                  value={values.square}
                   name="square"
-                  onChange={onChangePropertyData}
+                  onChange={changeHandler}
                 />
+                {errors.square && (
+                  <span className={styles.invalid}>{errors.square}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="city">
@@ -165,14 +173,17 @@ function AddProperty() {
                 <select
                   name="city"
                   id="city"
-                  value={propertyData.city}
-                  onChange={onChangePropertyData}
+                  value={values.city}
+                  onChange={changeHandler}
                 >
                   <option value="sofia">Sofia</option>
                   <option value="plovdiv">Plovdiv</option>
                   <option value="varna">Varna</option>
                   <option value="burgas">Burgas</option>
                 </select>
+                {errors.city && (
+                  <span className={styles.invalid}>{errors.city}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="room">
@@ -181,13 +192,16 @@ function AddProperty() {
                 <select
                   name="roomType"
                   id="room"
-                  value={propertyData.roomType}
-                  onChange={onChangePropertyData}
+                  value={values.roomType}
+                  onChange={changeHandler}
                 >
                   <option value="private-room">Private Room</option>
                   <option value="apartment">Apartment</option>
                   <option value="house">House</option>
                 </select>
+                {errors.roomType && (
+                  <span className={styles.invalid}>{errors.roomType}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="price">
@@ -197,10 +211,13 @@ function AddProperty() {
                   type="text"
                   id="price"
                   placeholder="Enter Price"
-                  value={propertyData.price}
+                  value={values.price}
                   name="price"
-                  onChange={onChangePropertyData}
+                  onChange={changeHandler}
                 />
+                {errors.price && (
+                  <span className={styles.invalid}>{errors.price}</span>
+                )}
               </div>
               <div className={styles.description}>
                 <label htmlFor="description">
@@ -209,10 +226,13 @@ function AddProperty() {
                 <textarea
                   id="description"
                   placeholder="Enter Description"
-                  value={propertyData.description}
+                  value={values.description}
                   name="description"
-                  onChange={onChangePropertyData}
+                  onChange={changeHandler}
                 />
+                {errors.description && (
+                  <span className={styles.invalid}>{errors.description}</span>
+                )}
               </div>
               <div>
                 <label htmlFor="images" className={styles.dropContainer}>

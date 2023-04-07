@@ -4,11 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 
 function AccountMenu(props) {
   const myAccLocation = useLocation();
-  // const [show, setShow] = useState(1);
-
-  // function showHandler(index) {
-  //   setShow(index);
-  // }
 
   return (
     <div className="container">

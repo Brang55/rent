@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
   const contextValues = {
     userId: userData.uid,
     isAuthenticated: userData.accessToken,
+    email: userData.email,
   };
 
   return (

@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 import styles from "../../myAccount/AddProperty/AddProperty.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { validateAddProperty } from "../../myAccount/AddProperty/ValidateAddProperty";
+
 function EditProperty() {
   const { propertyId } = useParams();
-
   const navigate = useNavigate();
-  const [editProperty, setEditProperty] = useState([]);
 
-  console.log(editProperty);
+  const [editProperty, setEditProperty] = useState([]);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const getProperty = async () => {
@@ -39,10 +40,14 @@ function EditProperty() {
 
   const onEditSubmit = async (e) => {
     e.preventDefault();
-    const propertyRef = doc(db, "properties", propertyId);
-    await updateDoc(propertyRef, {
-      ...editProperty,
-    });
+    const errors = validateAddProperty(editProperty);
+    setErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const propertyRef = doc(db, "properties", propertyId);
+      await updateDoc(propertyRef, {
+        ...editProperty,
+      });
+    }
   };
 
   const goBack = () => {
@@ -69,6 +74,9 @@ function EditProperty() {
                   value={editProperty.name}
                   onChange={onChangehandler}
                 />
+                {errors.name && (
+                  <span className={styles.invalid}>{errors.name}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="address">
@@ -82,6 +90,9 @@ function EditProperty() {
                   value={editProperty.address}
                   onChange={onChangehandler}
                 />
+                {errors.address && (
+                  <span className={styles.invalid}>{errors.address}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="square">
@@ -95,6 +106,9 @@ function EditProperty() {
                   value={editProperty.square}
                   onChange={onChangehandler}
                 />
+                {errors.square && (
+                  <span className={styles.invalid}>{errors.square}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="city">
@@ -111,6 +125,9 @@ function EditProperty() {
                   <option value="varna">Varna</option>
                   <option value="burgas">Burgas</option>
                 </select>
+                {errors.city && (
+                  <span className={styles.invalid}>{errors.city}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="room">
@@ -126,6 +143,9 @@ function EditProperty() {
                   <option value="apartment">Apartment</option>
                   <option value="house">House</option>
                 </select>
+                {errors.roomType && (
+                  <span className={styles.invalid}>{errors.roomType}</span>
+                )}
               </div>
               <div className={styles.addPropInput}>
                 <label htmlFor="price">
@@ -139,6 +159,9 @@ function EditProperty() {
                   value={editProperty.price}
                   onChange={onChangehandler}
                 />
+                {errors.price && (
+                  <span className={styles.invalid}>{errors.price}</span>
+                )}
               </div>
               <div className={styles.description}>
                 <label htmlFor="description">
@@ -151,6 +174,9 @@ function EditProperty() {
                   value={editProperty.description}
                   onChange={onChangehandler}
                 />
+                {errors.description && (
+                  <span className={styles.invalid}>{errors.description}</span>
+                )}
               </div>
               <div>
                 <label htmlFor="images" className={styles.dropContainer}>

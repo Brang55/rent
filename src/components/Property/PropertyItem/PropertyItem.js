@@ -19,22 +19,9 @@ function Property({
   address,
   urls,
 }) {
-  //   const getId = async () => {
-  //     const list = [];
-  //     const docRef = doc(db, "properties", id);
-  //     const docSnap = await getDoc(docRef);
-  //     if (docSnap.exists()) {
-  //       list.push({ id: id, ...docSnap.data() });
-  //       setDetailedPage(list);
-  //       //   console.log("Document data:", docSnap.data());
-  //     } else {
-  //       console.log("No such document!");
-  //     }
-  //   };
-
   return (
     <li>
-      <img src={urls[0]} alt="test" className={styles.propertyImg} />
+      <img src={urls[0]} alt={urls} className={styles.propertyImg} />
 
       <Link to={`${id}`}>
         <h2 className={styles.propertyName}>
