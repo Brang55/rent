@@ -1,4 +1,4 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -27,8 +27,9 @@ function CommentList() {
     timeStamp: serverTimestamp(),
   });
 
-  const [comment, setComment] = useState([]);
-  const [newComment, dispatch] = useReducer(commentReducer, comment);
+  const [newComment, dispatch] = useReducer(commentReducer, []);
+
+  console.log(newComment);
 
   const onCommentSubmit = async (e) => {
     e.preventDefault();
@@ -39,9 +40,16 @@ function CommentList() {
         userEmail: email,
       });
 
+      const newCommentData = {
+        ...values,
+        userId: userId,
+        userEmail: email,
+        id: response.id,
+      };
+
       dispatch({
         type: "COMMENT_ADD",
-        payload: response,
+        payload: newCommentData,
       });
     } catch (err) {
       console.log(err);
@@ -58,9 +66,8 @@ function CommentList() {
       const querySnapshot = await getDocs(getComment);
       querySnapshot.forEach((doc) => {
         listComments.push({ id: doc.id, ...doc.data() });
-        setComment(listComments);
-        // console.log(doc.id, " => ", doc.data());
         dispatch({ type: "COMMENT_FETCH", payload: listComments });
+        // console.log(doc.id, " => ", doc.data());
       });
     };
     loadComments();
