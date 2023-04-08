@@ -1,12 +1,10 @@
-// import { doc, getDoc } from "firebase/firestore";
-// import { db } from "../../../config/firebase";
-
-import styles from "./PropertyItem.module.css";
+import { Link } from "react-router-dom";
 
 import Bed from "./images/bed.svg";
 import Shower from "./images/shower.svg";
 import Size from "./images/size.svg";
-import { Link } from "react-router-dom";
+
+import styles from "./PropertyItem.module.css";
 
 function Property({
   id,

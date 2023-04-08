@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom";
 
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Map from "../Map/Map";
 import Info from "../Info/Info";
 import PropertyList from "../Property/PropertyList/PropertyList";
 import Roommate from "../Roommate/Roommate";
+import Footer from "../Footer/Footer";
 
 function HomePage() {
   const mainLoc = useLocation();

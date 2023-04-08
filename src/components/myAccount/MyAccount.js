@@ -1,7 +1,7 @@
-import AccountMenu from "./AccountMenu/AccountMenu";
-import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import AccountMenu from "./AccountMenu/AccountMenu";
 import AddProperty from "./AddProperty/AddProperty";
+import Footer from "../Footer/Footer";
 
 function MyAccount() {
   return (

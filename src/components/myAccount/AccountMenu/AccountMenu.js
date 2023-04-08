@@ -1,6 +1,6 @@
-import styles from "./AccountMenu.module.css";
-
 import { Link, useLocation } from "react-router-dom";
+
+import styles from "./AccountMenu.module.css";
 
 function AccountMenu(props) {
   const myAccLocation = useLocation();

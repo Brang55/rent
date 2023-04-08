@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 
-import styles from "./Login.module.css";
 import { useForm } from "../../../hooks/useForm";
+import { LoginButton } from "../../Buttons/Buttons";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
-import { LoginButton } from "../../Buttons/Buttons";
+
+import styles from "./Login.module.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -41,6 +43,7 @@ function Login() {
       <main>
         <form onSubmit={handleLogin} className={styles.loginForm}>
           <div className={styles.loginHolder}>
+            <h3 className={styles.formHeading}>Login</h3>
             <input
               type="email"
               placeholder="Email..."

@@ -1,7 +1,8 @@
-import styles from "./Header.module.css";
+import { useLocation } from "react-router-dom";
 
 import Navigation from "../Navigation/Navigation";
-import { useLocation } from "react-router-dom";
+
+import styles from "./Header.module.css";
 
 function Header() {
   let homeLoc = useLocation();

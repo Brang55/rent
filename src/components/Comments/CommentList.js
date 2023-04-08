@@ -1,3 +1,6 @@
+import { useEffect, useState, useReducer } from "react";
+import { useParams } from "react-router-dom";
+
 import {
   collection,
   query,
@@ -6,16 +9,13 @@ import {
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { useEffect, useState, useReducer } from "react";
+import { db } from "../../config/firebase";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { commentReducer } from "../../reducers/commentReducer";
-
-import { useParams } from "react-router-dom";
-import { db } from "../../config/firebase";
+import { useForm } from "../../hooks/useForm";
 
 import styles from "./Comments.module.css";
-import { useForm } from "../../hooks/useForm";
 
 function CommentList() {
   const { propertyId } = useParams();

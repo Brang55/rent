@@ -1,13 +1,16 @@
-import styles from "../AddProperty/AddProperty.module.css";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { useEffect, useState } from "react";
-import Header from "../../Header/Header";
-import Footer from "../../Footer/Footer";
-import AccountMenu from "../AccountMenu/AccountMenu";
+
 import { useAuthContext } from "../../../context/AuthContext";
-import { useLocation } from "react-router-dom";
+
+import Header from "../../Header/Header";
+import AccountMenu from "../AccountMenu/AccountMenu";
+import Footer from "../../Footer/Footer";
+
+import styles from "../AddProperty/AddProperty.module.css";
 
 function MyInformation() {
   const myInfoLocation = useLocation();

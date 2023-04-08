@@ -1,24 +1,22 @@
-import { auth, db } from "../../../config/firebase";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { auth, db } from "../../../config/firebase";
 
 import { validateRegister } from "./ValidateRegister";
-
-import styles from "./RegistrationForm.module.css";
-import { useNavigate } from "react-router-dom";
-
 import { useForm } from "../../../hooks/useForm";
-import { useState } from "react";
+import { RegisterButton } from "../../Buttons/Buttons";
 
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
-import { RegisterButton } from "../../Buttons/Buttons";
+import styles from "./RegistrationForm.module.css";
 
 function RegistrationForm() {
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { values, changeHandler } = useForm(
     {
@@ -48,7 +46,6 @@ function RegistrationForm() {
           timeStamp: serverTimestamp(),
         });
         navigate("/");
-        setIsSubmitting(true);
       } catch (err) {
         console.log(err);
       }

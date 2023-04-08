@@ -1,14 +1,15 @@
-import Header from "../../Header/Header";
-import Footer from "../../Footer/Footer";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { useEffect, useState } from "react";
-
-import styles from "../../myAccount/AddProperty/AddProperty.module.css";
-import { useNavigate, useParams } from "react-router-dom";
 
 import { validateAddProperty } from "../../myAccount/AddProperty/ValidateAddProperty";
+
+import Header from "../../Header/Header";
+import Footer from "../../Footer/Footer";
+
+import styles from "../../myAccount/AddProperty/AddProperty.module.css";
 
 function EditProperty() {
   const { propertyId } = useParams();

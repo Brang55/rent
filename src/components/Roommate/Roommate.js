@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
+import { GoTo } from "../Buttons/Buttons";
+
 import styles from "./Roommate.module.css";
 
 import Flex1 from "./images/flex1.png";
 import Flex2 from "./images/flex2.png";
 import Flex3 from "./images/flex3.png";
 import Flex4 from "./images/flex4.png";
-import { GoTo } from "../Buttons/Buttons";
 
 function Roommate() {
   return (

@@ -1,15 +1,15 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 
+import Header from "../../Header/Header";
 import HomeProperties from "../../HomeProperties/HomeProperties";
 import PropertyItem from "../PropertyItem/PropertyItem";
-import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 
 import styles from "./PropertyList.module.css";
-
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 function PropertyList() {
   const location = useLocation();

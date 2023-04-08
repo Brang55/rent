@@ -14,7 +14,7 @@
 
 .btn:hover,
 .submitBtn:hover,
-.backBtn {
+.backBtn:hover {
   color: #f4511e;
   background-color: #fff;
   border: 1px solid #bdbdbd;

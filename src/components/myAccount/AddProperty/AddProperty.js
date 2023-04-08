@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
 import { db, storage } from "../../../config/firebase";
-import styles from "./AddProperty.module.css";
-import AccountMenu from "../AccountMenu/AccountMenu";
-import Footer from "../../Footer/Footer";
-import Header from "../../Header/Header";
-import { useLocation, useNavigate } from "react-router-dom";
+
 import { useAuthContext } from "../../../context/AuthContext";
 import { useForm } from "../../../hooks/useForm";
 import { validateAddProperty } from "./ValidateAddProperty";
+
+import Header from "../../Header/Header";
+import AccountMenu from "../AccountMenu/AccountMenu";
+import Footer from "../../Footer/Footer";
+
+import styles from "./AddProperty.module.css";
 
 function AddProperty() {
   const { userId } = useAuthContext();
