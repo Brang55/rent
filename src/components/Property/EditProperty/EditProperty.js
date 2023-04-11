@@ -48,6 +48,7 @@ function EditProperty() {
       await updateDoc(propertyRef, {
         ...editProperty,
       });
+      navigate(-1);
     }
   };
 
@@ -188,12 +189,12 @@ function EditProperty() {
                 </label>
               </div>
               <div className={styles.btnContainer}>
-                <button
+                <span
                   className={`${styles.newProperty} ${styles.editProperty}`}
                   onClick={goBack}
                 >
                   Cancel
-                </button>
+                </span>
                 <input
                   type="submit"
                   className={`${styles.newProperty} ${styles.editProperty}`}

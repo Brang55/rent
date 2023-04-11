@@ -78,6 +78,7 @@
 
 .newProperty {
   width: 100%;
+  text-align: center;
   padding: 20px 10px;
   background-color: #f4511e;
   border: 1px solid transparent;
