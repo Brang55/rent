@@ -15,7 +15,6 @@ import MyInformation from "./components/myAccount/MyInformation/MyInformation";
 import MyProperties from "./components/myAccount/MyProperties/MyProperties";
 import PropertyList from "./components/Property/PropertyList/PropertyList";
 
-import EditProperty from "./components/Property/EditProperty/EditProperty";
 import "./style.css";
 
 function App() {
@@ -38,7 +37,7 @@ function App() {
           <Route path="/my-account/my-properties" element={<MyProperties />} />
           <Route
             path="/my-account/my-properties/:propertyId/edit"
-            element={<EditProperty />}
+            element={<AddProperty />}
           />
         </Route>
 

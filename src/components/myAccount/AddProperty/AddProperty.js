@@ -1,43 +1,81 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db, storage } from "../../../config/firebase";
 
 import { useAuthContext } from "../../../context/AuthContext";
-import { useForm } from "../../../hooks/useForm";
-import { validateAddProperty } from "./ValidateAddProperty";
 
 import Header from "../../Header/Header";
 import AccountMenu from "../AccountMenu/AccountMenu";
 import Footer from "../../Footer/Footer";
 
 import styles from "./AddProperty.module.css";
+import PropertyForm from "../PropertyForm/PropertyForm";
 
 function AddProperty() {
   const { userId } = useAuthContext();
-  const accLocation = useLocation();
+  const { pathname } = useLocation();
+  const { propertyId } = useParams();
 
   const navigate = useNavigate();
-
-  const [errors, setErrors] = useState({});
-  const { values, changeHandler } = useForm(
-    {
-      name: "",
-      address: "",
-      square: "",
-      city: "",
-      roomType: "",
-      price: "",
-      description: "",
-    },
-    validateAddProperty
-  );
 
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
   const [per, setPer] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [edit, setEdit] = useState(false);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    square: "",
+    city: "",
+    roomType: "",
+    price: "",
+    description: "",
+  });
+
+  console.log(formData);
+
+  useEffect(() => {
+    if (pathname === `/my-account/my-properties/${propertyId}/edit`) {
+      setEdit(true);
+    }
+  }, [propertyId, pathname]);
+
+  useEffect(() => {
+    if (edit) {
+      const getProperty = async () => {
+        const docRef = doc(db, "properties", propertyId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setFormData(docSnap.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+      };
+
+      getProperty();
+    }
+  }, [propertyId, edit]);
+
+  const formOnChangleHandler = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
 
   const handleImageChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
@@ -92,12 +130,12 @@ function AddProperty() {
 
   const addPropertySubmit = async (e) => {
     e.preventDefault();
-    const errors = validateAddProperty(values);
+    // const errors = validateAddProperty(values);
     setErrors(errors);
     if (Object.keys(errors).length === 0) {
       try {
         await addDoc(collection(db, "properties"), {
-          ...values,
+          ...formData,
           urls,
           userId: userId,
           timeStamp: serverTimestamp(),
@@ -109,167 +147,46 @@ function AddProperty() {
     }
   };
 
+  const onEditSubmit = async (e) => {
+    e.preventDefault();
+    // const errors = validateAddProperty(editProperty);
+    setErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      const propertyRef = doc(db, "properties", propertyId);
+      await updateDoc(propertyRef, {
+        ...formData,
+      });
+      navigate(-1);
+    }
+  };
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <>
-      {accLocation.pathname === "/my-account" ? "" : <Header />}
+      {pathname === "/my-account" ? "" : <Header />}
       <main>
-        {accLocation.pathname === "/my-account" ? "" : <AccountMenu />}
+        {pathname === "/my-account" ? "" : <AccountMenu />}
         <section className={styles.addProperty}>
           <div className="container">
-            <form
-              className={styles.addPropertyForm}
-              onSubmit={addPropertySubmit}
-            >
-              <h2 className={styles.addPropertyHeading}>Add New Property</h2>
-              <div className={styles.addPropInput}>
-                <label htmlFor="name">
-                  Name<span className={styles.required}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Enter Name"
-                  value={values.name}
-                  name="name"
-                  onChange={changeHandler}
-                />
-                {errors.name && (
-                  <span className={styles.invalid}>{errors.name}</span>
-                )}
-              </div>
-              <div className={styles.addPropInput}>
-                <label htmlFor="address">
-                  Address<span className={styles.required}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="address"
-                  placeholder="Enter Address"
-                  value={values.address}
-                  name="address"
-                  onChange={changeHandler}
-                />
-                {errors.address && (
-                  <span className={styles.invalid}>{errors.address}</span>
-                )}
-              </div>
-              <div className={styles.addPropInput}>
-                <label htmlFor="square">
-                  Square<span className={styles.required}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="square"
-                  placeholder="Enter Square"
-                  value={values.square}
-                  name="square"
-                  onChange={changeHandler}
-                />
-                {errors.square && (
-                  <span className={styles.invalid}>{errors.square}</span>
-                )}
-              </div>
-              <div className={styles.addPropInput}>
-                <label htmlFor="city">
-                  City<span className={styles.required}>*</span>
-                </label>
-                <select
-                  name="city"
-                  id="city"
-                  value={values.city}
-                  onChange={changeHandler}
-                >
-                  <option value="select" selected="selected">
-                    ----
-                  </option>
-                  <option value="sofia">Sofia</option>
-                  <option value="plovdiv">Plovdiv</option>
-                  <option value="varna">Varna</option>
-                  <option value="burgas">Burgas</option>
-                </select>
-                {errors.city && (
-                  <span className={styles.invalid}>{errors.city}</span>
-                )}
-              </div>
-              <div className={styles.addPropInput}>
-                <label htmlFor="room">
-                  Room Type<span className={styles.required}>*</span>
-                </label>
-                <select
-                  name="roomType"
-                  id="room"
-                  value={values.roomType}
-                  onChange={changeHandler}
-                >
-                  <option value="select" selected="selected">
-                    ----
-                  </option>
-                  <option value="private-room">Private Room</option>
-                  <option value="apartment">Apartment</option>
-                  <option value="house">House</option>
-                </select>
-                {errors.roomType && (
-                  <span className={styles.invalid}>{errors.roomType}</span>
-                )}
-              </div>
-              <div className={styles.addPropInput}>
-                <label htmlFor="price">
-                  Price<span className={styles.required}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="price"
-                  placeholder="Enter Price"
-                  value={values.price}
-                  name="price"
-                  onChange={changeHandler}
-                />
-                {errors.price && (
-                  <span className={styles.invalid}>{errors.price}</span>
-                )}
-              </div>
-              <div className={styles.description}>
-                <label htmlFor="description">
-                  Description<span className={styles.required}>*</span>
-                </label>
-                <textarea
-                  id="description"
-                  placeholder="Enter Description"
-                  value={values.description}
-                  name="description"
-                  onChange={changeHandler}
-                />
-                {errors.description && (
-                  <span className={styles.invalid}>{errors.description}</span>
-                )}
-              </div>
-              <div>
-                <label htmlFor="images" className={styles.dropContainer}>
-                  <span className={styles.dropTitle}>
-                    Drop files here or
-                    <input
-                      type="file"
-                      id="images"
-                      accept="image/*"
-                      multiple
-                      onChange={handleImageChange}
-                    />
-                  </span>
-                </label>
-              </div>
-              <div className={styles.btnContainer}>
-                <input
-                  type="submit"
-                  className={styles.newProperty}
-                  value="Add New Property"
-                  disabled={per !== null && per < 100}
-                />
-              </div>
-            </form>
+            <PropertyForm
+              {...formData}
+              per={per}
+              formOnChangleHandler={formOnChangleHandler}
+              handleImageChange={handleImageChange}
+              edit={edit}
+              addPropertySubmit={addPropertySubmit}
+              onEditSubmit={onEditSubmit}
+              goBack={goBack}
+              errors={errors}
+              urls={urls}
+            />
           </div>
         </section>
       </main>
-      {accLocation.pathname === "/my-account" ? "" : <Footer />}
+      {pathname === "/my-account" ? "" : <Footer />}
     </>
   );
 }
