@@ -156,6 +156,19 @@ function PropertyForm({
           </span>
         </label>
       </div>
+      {edit && (
+        <ul>
+          {urls.map((url) => {
+            return (
+              <li>
+                <img src={url} alt={url} />
+                <span>X</span>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
       {edit ? (
         <div className={styles.btnContainer}>
           <span

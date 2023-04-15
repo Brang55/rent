@@ -45,13 +45,27 @@ function AddProperty() {
     description: "",
   });
 
-  console.log(formData);
+  const editPath = `/my-account/my-properties/${propertyId}/edit`;
 
   useEffect(() => {
-    if (pathname === `/my-account/my-properties/${propertyId}/edit`) {
+    if (pathname === editPath) {
       setEdit(true);
-    }
-  }, [propertyId, pathname]);
+    } else setEdit(false);
+
+    return () => {
+      setFormData({
+        name: "",
+        address: "",
+        square: "",
+        city: "",
+        roomType: "",
+        price: "",
+        description: "",
+      });
+    };
+  }, [propertyId, pathname, editPath]);
+
+  console.log(formData);
 
   useEffect(() => {
     if (edit) {
