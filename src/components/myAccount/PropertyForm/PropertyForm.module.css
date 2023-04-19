@@ -96,7 +96,7 @@ textarea {
 }
 
 .btnContainer {
-  width: 500px;
+  width: 700px;
   margin: 0 auto;
 }
 
@@ -161,6 +161,6 @@ input[type="file"]::file-selector-button:hover {
 
 .editProperty {
   float: left;
-  width: 40%;
-  margin-right: 10%;
+  width: 30%;
+  margin-right: 2%;
 }

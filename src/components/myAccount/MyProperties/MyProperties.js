@@ -4,14 +4,7 @@ import { db } from "../../../config/firebase";
 import Header from "../../Header/Header";
 import Footer from "../../Footer/Footer";
 
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 import AccountMenu from "../AccountMenu/AccountMenu";
 
@@ -26,13 +19,26 @@ import Size from "../../Property/PropertyItem/images/size.svg";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../../../context/AuthContext";
+import { useConfirm } from "../../../hooks/useConfirm";
+import Confirmation from "../Confirmation/Confirmation";
 
 function MyProperties() {
   // const { propertyId } = useParams();
 
   const myPropLocation = useLocation();
   const { userId } = useAuthContext();
-  const [userProperties, setUserProperties] = useState([]);
+
+  const [clickedProperty, setClickedProperty] = useState(null);
+
+  const {
+    submitDelete,
+
+    cancelConfirmation,
+    deleteProperty,
+    triggerConfirmation,
+    userProperties,
+    setUserProperties,
+  } = useConfirm();
 
   useEffect(() => {
     const getUserProperties = async () => {
@@ -50,11 +56,12 @@ function MyProperties() {
     };
 
     getUserProperties();
-  }, [userId]);
+  }, [userId, setUserProperties]);
 
-  const deleteProperty = async (itemId) => {
-    await deleteDoc(doc(db, "properties", itemId));
-    setUserProperties(userProperties.filter((x) => x.id !== itemId));
+  const onDeleteClick = (itemId) => {
+    triggerConfirmation();
+    setClickedProperty(itemId);
+    // await deleteProperty(propertyClicked);
   };
 
   return (
@@ -110,7 +117,7 @@ function MyProperties() {
                       <li>
                         <button
                           className={styles.propertyButton}
-                          onClick={() => deleteProperty(x.id)}
+                          onClick={() => onDeleteClick(x.id)}
                         >
                           Delete
                         </button>
@@ -120,6 +127,13 @@ function MyProperties() {
                 );
               })}
             </ul>
+            {submitDelete && (
+              <Confirmation
+                cancelConfirmation={cancelConfirmation}
+                deleteProperty={deleteProperty}
+                clickedProperty={clickedProperty}
+              />
+            )}
             {userProperties.length <= 0 && (
               <span>You dont have any Properties added yet</span>
             )}

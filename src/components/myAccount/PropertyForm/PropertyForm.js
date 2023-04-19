@@ -1,3 +1,5 @@
+import { useConfirm } from "../../../hooks/useConfirm";
+import Confirmation from "../Confirmation/Confirmation";
 import styles from "./PropertyForm.module.css";
 
 function PropertyForm({
@@ -18,6 +20,13 @@ function PropertyForm({
   errors,
   goBack,
 }) {
+  const {
+    submitDelete,
+    triggerConfirmation,
+    cancelConfirmation,
+    deleteProperty,
+  } = useConfirm();
+
   return (
     <form
       className={styles.addPropertyForm}
@@ -156,33 +165,36 @@ function PropertyForm({
           </span>
         </label>
       </div>
-      {edit && (
-        <ul>
-          {urls.map((url) => {
-            return (
-              <li>
-                <img src={url} alt={url} />
-                <span>X</span>
-              </li>
-            );
-          })}
-        </ul>
-      )}
 
       {edit ? (
-        <div className={styles.btnContainer}>
-          <span
-            className={`${styles.newProperty} ${styles.editProperty}`}
-            onClick={goBack}
-          >
-            Cancel
-          </span>
-          <input
-            type="submit"
-            className={`${styles.newProperty} ${styles.editProperty}`}
-            value="Save"
-          />
-        </div>
+        <>
+          <div className={styles.btnContainer}>
+            <span
+              className={`${styles.newProperty} ${styles.editProperty}`}
+              onClick={goBack}
+            >
+              Cancel
+            </span>
+            <input
+              type="submit"
+              className={`${styles.newProperty} ${styles.editProperty}`}
+              value="Save"
+            />
+            <span
+              className={`${styles.newProperty} ${styles.editProperty}`}
+              style={{ marginRight: 0 }}
+              onClick={triggerConfirmation}
+            >
+              Delete
+            </span>
+          </div>
+          {submitDelete && (
+            <Confirmation
+              cancelConfirmation={cancelConfirmation}
+              deleteProperty={deleteProperty}
+            />
+          )}
+        </>
       ) : (
         <div className={styles.btnContainer}>
           <input

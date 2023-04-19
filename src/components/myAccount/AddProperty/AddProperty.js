@@ -14,6 +14,7 @@ import {
 import { db, storage } from "../../../config/firebase";
 
 import { useAuthContext } from "../../../context/AuthContext";
+import { useForm } from "../../../hooks/useForm";
 
 import Header from "../../Header/Header";
 import AccountMenu from "../AccountMenu/AccountMenu";
@@ -35,7 +36,7 @@ function AddProperty() {
   const [errors, setErrors] = useState({});
   const [edit, setEdit] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const { values, setValues, changeHandler } = useForm({
     name: "",
     address: "",
     square: "",
@@ -53,7 +54,7 @@ function AddProperty() {
     } else setEdit(false);
 
     return () => {
-      setFormData({
+      setValues({
         name: "",
         address: "",
         square: "",
@@ -63,9 +64,7 @@ function AddProperty() {
         description: "",
       });
     };
-  }, [propertyId, pathname, editPath]);
-
-  console.log(formData);
+  }, [propertyId, pathname, editPath, setValues]);
 
   useEffect(() => {
     if (edit) {
@@ -74,22 +73,15 @@ function AddProperty() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setFormData(docSnap.data());
+          setValues(docSnap.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("No such document!");
         }
       };
 
       getProperty();
     }
-  }, [propertyId, edit]);
-
-  const formOnChangleHandler = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
-  };
+  }, [propertyId, edit, setValues]);
 
   const handleImageChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
@@ -149,7 +141,7 @@ function AddProperty() {
     if (Object.keys(errors).length === 0) {
       try {
         await addDoc(collection(db, "properties"), {
-          ...formData,
+          ...values,
           urls,
           userId: userId,
           timeStamp: serverTimestamp(),
@@ -168,7 +160,7 @@ function AddProperty() {
     if (Object.keys(errors).length === 0) {
       const propertyRef = doc(db, "properties", propertyId);
       await updateDoc(propertyRef, {
-        ...formData,
+        ...values,
       });
       navigate(-1);
     }
@@ -186,9 +178,9 @@ function AddProperty() {
         <section className={styles.addProperty}>
           <div className="container">
             <PropertyForm
-              {...formData}
+              {...values}
               per={per}
-              formOnChangleHandler={formOnChangleHandler}
+              formOnChangleHandler={changeHandler}
               handleImageChange={handleImageChange}
               edit={edit}
               addPropertySubmit={addPropertySubmit}
