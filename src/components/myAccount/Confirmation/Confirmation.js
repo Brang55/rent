@@ -1,3 +1,4 @@
+import Backdrop from "../../Backdrop/Backdrop";
 import styles from "./Confirmation.module.css";
 
 function Confirmation({
@@ -5,12 +6,16 @@ function Confirmation({
   deleteProperty,
   propertyId,
   clickedProperty,
+  backDropHolder,
+  name,
 }) {
   return (
     <>
-      <div className={styles.confirmBg}></div>
+      <Backdrop backDropHolder={backDropHolder} />
       <div className={styles.confirmBox}>
-        <p className={styles.confirmText}>Are you sure?</p>
+        <p
+          className={styles.confirmText}
+        >{`You are about to delete ${name}`}</p>
         <div className={styles.confirmBtnContainer}>
           <button className={styles.confirmBtn} onClick={cancelConfirmation}>
             Cancel

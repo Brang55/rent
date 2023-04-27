@@ -19,13 +19,17 @@ function PropertyForm({
   onEditSubmit,
   errors,
   goBack,
+  imageDelete,
 }) {
   const {
     submitDelete,
     triggerConfirmation,
     cancelConfirmation,
     deleteProperty,
+    backDropHolder,
   } = useConfirm();
+
+  console.log(urls);
 
   return (
     <form
@@ -91,7 +95,7 @@ function PropertyForm({
           value={city}
           onChange={formOnChangleHandler}
         >
-          <option value="select" selected="selected">
+          <option value="select" selected>
             ----
           </option>
           <option value="sofia">Sofia</option>
@@ -111,7 +115,7 @@ function PropertyForm({
           value={roomType}
           onChange={formOnChangleHandler}
         >
-          <option value="select" selected="selected">
+          <option value="select" selected>
             ----
           </option>
           <option value="private-room">Private Room</option>
@@ -151,6 +155,20 @@ function PropertyForm({
           <span className={styles.invalid}>{errors.description}</span>
         )}
       </div>
+      <ul className={styles.images}>
+        {urls.map((url) => {
+          return (
+            <li key={url}>
+              <img src={url} alt="testImg" className={styles.uploadedImages} />
+              <span
+                className={styles.removeImg}
+                onClick={() => imageDelete(url)}
+              ></span>
+            </li>
+          );
+        })}
+      </ul>
+
       <div>
         <label htmlFor="images" className={styles.dropContainer}>
           <span className={styles.dropTitle}>
@@ -192,6 +210,8 @@ function PropertyForm({
             <Confirmation
               cancelConfirmation={cancelConfirmation}
               deleteProperty={deleteProperty}
+              backDropHolder={backDropHolder}
+              name={name}
             />
           )}
         </>

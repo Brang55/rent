@@ -21,7 +21,9 @@ export const useConfirm = () => {
     setSubmitDelete(!submitDelete);
   };
 
-  console.log(userProperties);
+  const backDropHolder = () => {
+    setSubmitDelete(!submitDelete);
+  };
 
   const deleteProperty = async (itemId) => {
     await deleteDoc(
@@ -41,5 +43,6 @@ export const useConfirm = () => {
     userProperties,
     setUserProperties,
     propertyId,
+    backDropHolder,
   };
 };

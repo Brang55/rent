@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  getStorage,
+  deleteObject,
+  getMetadata,
+} from "firebase/storage";
 
 import {
   collection,
@@ -10,6 +17,8 @@ import {
   doc,
   getDoc,
   updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { db, storage } from "../../../config/firebase";
 
@@ -22,6 +31,7 @@ import Footer from "../../Footer/Footer";
 
 import styles from "./AddProperty.module.css";
 import PropertyForm from "../PropertyForm/PropertyForm";
+import { fileReducer } from "../../../reducers/fileReducer";
 
 function AddProperty() {
   const { userId } = useAuthContext();
@@ -30,8 +40,10 @@ function AddProperty() {
 
   const navigate = useNavigate();
 
+  const [urls, dispatch] = useReducer(fileReducer, []);
+
   const [images, setImages] = useState([]);
-  const [urls, setUrls] = useState([]);
+  // const [urls, setUrls] = useState([]);
   const [per, setPer] = useState(null);
   const [errors, setErrors] = useState({});
   const [edit, setEdit] = useState(false);
@@ -74,6 +86,12 @@ function AddProperty() {
 
         if (docSnap.exists()) {
           setValues(docSnap.data());
+          const newUrls = docSnap.data().urls;
+
+          dispatch({
+            type: "FILE_EDIT",
+            payload: newUrls,
+          });
         } else {
           console.log("No such document!");
         }
@@ -124,7 +142,7 @@ function AddProperty() {
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setUrls((prevState) => [...prevState, downloadURL]);
+              dispatch({ type: "FILE_UPLOAD", payload: downloadURL });
             });
           }
         );
@@ -132,7 +150,7 @@ function AddProperty() {
       });
     };
     if (images.length > 0) uploadFile();
-  }, [images, setUrls]);
+  }, [images]);
 
   const addPropertySubmit = async (e) => {
     e.preventDefault();
@@ -161,6 +179,7 @@ function AddProperty() {
       const propertyRef = doc(db, "properties", propertyId);
       await updateDoc(propertyRef, {
         ...values,
+        urls,
       });
       navigate(-1);
     }
@@ -168,6 +187,25 @@ function AddProperty() {
 
   const goBack = () => {
     navigate(-1);
+  };
+
+  const imageDelete = (imageName) => {
+    const img = ref(storage, imageName);
+
+    deleteObject(img)
+      .then(() => {
+        dispatch({
+          type: "FILE_DELETE",
+          payload: imageName,
+        });
+        const deletedImage = doc(db, "properties", propertyId);
+        updateDoc(deletedImage, {
+          urls: arrayRemove(imageName),
+        });
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
   };
 
   return (
@@ -188,6 +226,7 @@ function AddProperty() {
               goBack={goBack}
               errors={errors}
               urls={urls}
+              imageDelete={imageDelete}
             />
           </div>
         </section>
