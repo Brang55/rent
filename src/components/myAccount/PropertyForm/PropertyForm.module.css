@@ -47,6 +47,7 @@
 .addPropInput {
   float: left;
   width: 30%;
+  min-height: 120px;
   margin-bottom: 20px;
   margin-right: 3%;
 }
@@ -70,6 +71,11 @@
   display: inline-block;
   color: #f4511e;
   margin-left: 5px;
+}
+
+.invalid {
+  float: left;
+  color: rgb(255, 0, 0);
 }
 
 .addPropInput select {

@@ -1,11 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../config/firebase";
 
-import { validateRegister } from "./ValidateRegister";
 import { useForm } from "../../../hooks/useForm";
 import { RegisterButton } from "../../Buttons/Buttons";
 
@@ -16,39 +14,30 @@ import styles from "./RegistrationForm.module.css";
 function RegistrationForm() {
   const navigate = useNavigate();
 
-  const [errors, setErrors] = useState({});
-
-  const { values, changeHandler } = useForm(
-    {
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validateRegister
-  );
+  const { values, changeHandler, errors, onBlurChange } = useForm({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = validateRegister(values);
-    setErrors(errors);
-    if (Object.keys(errors).length === 0) {
-      try {
-        const res = await createUserWithEmailAndPassword(
-          auth,
-          values.email,
-          values.password
-        );
-        await setDoc(doc(db, "users", res.user.uid), {
-          ...values,
-          timeStamp: serverTimestamp(),
-        });
-        navigate("/");
-      } catch (err) {
-        console.log(err);
-      }
+
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        values.email,
+        values.password
+      );
+      await setDoc(doc(db, "users", res.user.uid), {
+        ...values,
+        timeStamp: serverTimestamp(),
+      });
+      navigate("/");
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -71,6 +60,7 @@ function RegistrationForm() {
                 placeholder="First Name"
                 value={values.firstName}
                 onChange={changeHandler}
+                onBlur={onBlurChange}
               />
               {errors.firstName && (
                 <span className={styles.invalid}>{errors.firstName}</span>
@@ -88,6 +78,7 @@ function RegistrationForm() {
                 placeholder="LastName"
                 value={values.lastName}
                 onChange={changeHandler}
+                onBlur={onBlurChange}
               />
               {errors.lastName && (
                 <span className={styles.invalid}>{errors.lastName}</span>
@@ -105,6 +96,7 @@ function RegistrationForm() {
                 placeholder="Email"
                 value={values.email}
                 onChange={changeHandler}
+                onBlur={onBlurChange}
               />
               {errors.email && (
                 <span className={styles.invalid}>{errors.email}</span>
@@ -122,6 +114,7 @@ function RegistrationForm() {
                 placeholder="Password"
                 value={values.password}
                 onChange={changeHandler}
+                onBlur={onBlurChange}
               />
               {errors.password && (
                 <span className={styles.invalid}>{errors.password}</span>
@@ -139,6 +132,7 @@ function RegistrationForm() {
                 placeholder="Confirm Password"
                 value={values.confirmPassword}
                 onChange={changeHandler}
+                onBlur={onBlurChange}
               />
               {errors.confirmPassword && (
                 <span className={styles.invalid}>{errors.confirmPassword}</span>

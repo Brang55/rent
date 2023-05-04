@@ -5,9 +5,7 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
-  getStorage,
   deleteObject,
-  getMetadata,
 } from "firebase/storage";
 
 import {
@@ -17,7 +15,6 @@ import {
   doc,
   getDoc,
   updateDoc,
-  arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
 import { db, storage } from "../../../config/firebase";
@@ -45,10 +42,9 @@ function AddProperty() {
   const [images, setImages] = useState([]);
   // const [urls, setUrls] = useState([]);
   const [per, setPer] = useState(null);
-  const [errors, setErrors] = useState({});
   const [edit, setEdit] = useState(false);
 
-  const { values, setValues, changeHandler } = useForm({
+  const { values, setValues, changeHandler, onBlurChange, errors } = useForm({
     name: "",
     address: "",
     square: "",
@@ -154,8 +150,6 @@ function AddProperty() {
 
   const addPropertySubmit = async (e) => {
     e.preventDefault();
-    // const errors = validateAddProperty(values);
-    setErrors(errors);
     if (Object.keys(errors).length === 0) {
       try {
         await addDoc(collection(db, "properties"), {
@@ -173,8 +167,6 @@ function AddProperty() {
 
   const onEditSubmit = async (e) => {
     e.preventDefault();
-    // const errors = validateAddProperty(editProperty);
-    setErrors(errors);
     if (Object.keys(errors).length === 0) {
       const propertyRef = doc(db, "properties", propertyId);
       await updateDoc(propertyRef, {
@@ -227,6 +219,7 @@ function AddProperty() {
               errors={errors}
               urls={urls}
               imageDelete={imageDelete}
+              onBlurChange={onBlurChange}
             />
           </div>
         </section>

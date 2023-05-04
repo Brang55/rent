@@ -20,6 +20,7 @@ function PropertyForm({
   errors,
   goBack,
   imageDelete,
+  onBlurChange,
 }) {
   const {
     submitDelete,
@@ -28,8 +29,6 @@ function PropertyForm({
     deleteProperty,
     backDropHolder,
   } = useConfirm();
-
-  console.log(urls);
 
   return (
     <form
@@ -50,6 +49,7 @@ function PropertyForm({
           value={name}
           name="name"
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
         />
         {errors.name && <span className={styles.invalid}>{errors.name}</span>}
       </div>
@@ -64,6 +64,7 @@ function PropertyForm({
           value={address}
           name="address"
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
         />
         {errors.address && (
           <span className={styles.invalid}>{errors.address}</span>
@@ -80,6 +81,7 @@ function PropertyForm({
           value={square}
           name="square"
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
         />
         {errors.square && (
           <span className={styles.invalid}>{errors.square}</span>
@@ -94,9 +96,11 @@ function PropertyForm({
           id="city"
           value={city}
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
+          required
         >
           <option value="select" selected>
-            ----
+            ---
           </option>
           <option value="sofia">Sofia</option>
           <option value="plovdiv">Plovdiv</option>
@@ -114,6 +118,8 @@ function PropertyForm({
           id="room"
           value={roomType}
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
+          required
         >
           <option value="select" selected>
             ----
@@ -137,6 +143,7 @@ function PropertyForm({
           value={price}
           name="price"
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
         />
         {errors.price && <span className={styles.invalid}>{errors.price}</span>}
       </div>
@@ -150,6 +157,7 @@ function PropertyForm({
           value={description}
           name="description"
           onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
         />
         {errors.description && (
           <span className={styles.invalid}>{errors.description}</span>
