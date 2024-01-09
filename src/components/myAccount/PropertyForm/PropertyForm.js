@@ -2,11 +2,16 @@ import { useConfirm } from "../../../hooks/useConfirm";
 import Confirmation from "../Confirmation/Confirmation";
 import styles from "./PropertyForm.module.css";
 
+import cities from "../../../bg";
+import { useReducer } from "react";
+import { filterReducer } from "../../../reducers/filterReducer";
+
 function PropertyForm({
   name,
   address,
   square,
   city,
+  // area,
   roomType,
   price,
   description,
@@ -29,6 +34,20 @@ function PropertyForm({
     deleteProperty,
     backDropHolder,
   } = useConfirm();
+
+  // const [smallCity, dispatch] = useReducer(filterReducer, []);
+
+  // const areaDropdown = (selectedCity) => {
+  //   const matchingCities = cities.filter(
+  //     (cityData) => cityData.admin_name === selectedCity
+  //   );
+  //   dispatch({ type: "CITY_CHANGED", payload: matchingCities });
+  // };
+
+  // const handleCityChange = (e) => {
+  //   formOnChangleHandler(e);
+  //   areaDropdown(e.target.value);
+  // };
 
   return (
     <form
@@ -99,16 +118,43 @@ function PropertyForm({
           onBlur={onBlurChange}
           required
         >
-          <option value="select" selected>
-            ---
-          </option>
-          <option value="sofia">Sofia</option>
-          <option value="plovdiv">Plovdiv</option>
-          <option value="varna">Varna</option>
-          <option value="burgas">Burgas</option>
+          <option value="select">---</option>
+          {cities.map((city) => {
+            if (city.capital === "admin" || city.capital === "primary") {
+              return (
+                <option key={city.population} value={city.city}>
+                  {city.city}
+                </option>
+              );
+            }
+            return null;
+          })}
         </select>
         {errors.city && <span className={styles.invalid}>{errors.city}</span>}
       </div>
+      {/* <div className={styles.addPropInput}>
+        <label htmlFor="area">
+          Area<span className={styles.required}>*</span>
+        </label>
+        <select
+          name="area"
+          id="area"
+          value={area}
+          onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
+          required
+        >
+          <option value="select">---</option>
+          {smallCity.map((city) => {
+            return (
+              <option key={city.population} value={city.city}>
+                {city.city}
+              </option>
+            );
+          })}
+        </select>
+        {errors.city && <span className={styles.invalid}>{errors.city}</span>}
+      </div> */}
       <div className={styles.addPropInput}>
         <label htmlFor="room">
           Room Type<span className={styles.required}>*</span>

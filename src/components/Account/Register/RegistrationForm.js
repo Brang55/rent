@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "../../../config/firebase";
 
@@ -26,16 +29,17 @@ function RegistrationForm() {
     e.preventDefault();
 
     try {
-      const res = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         values.email,
         values.password
       );
-      await setDoc(doc(db, "users", res.user.uid), {
+      await setDoc(doc(db, "users", userCredential.user.uid), {
         ...values,
         timeStamp: serverTimestamp(),
       });
-      navigate("/");
+      await sendEmailVerification(userCredential.user);
+      navigate("/reg-verify");
     } catch (err) {
       console.log(err);
     }

@@ -8,13 +8,15 @@ function Header() {
   let homeLoc = useLocation();
   return (
     <header
-      className={
-        homeLoc.pathname === "/" ? styles.diffHeader : styles.diffHeader
-      }
+      className={homeLoc.pathname === "/" ? styles.header : styles.diffHeader}
     >
-      <Navigation />
+      <div class="container">
+        <Navigation />
+      </div>
     </header>
   );
 }
+
+// className={homeLoc.pathname === "/" ? styles.header : styles.diffHeader}
 
 export default Header;

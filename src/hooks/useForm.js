@@ -3,16 +3,14 @@ import { useState } from "react";
 export const useForm = (initialValues) => {
   const [values, setValues] = useState(initialValues);
 
-  console.log(values);
-
   const [errors, setErrors] = useState(initialValues);
 
   const changeHandler = (e) => {
     setValues((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
 
-  const onBlurChange = (event) => {
-    const { name, value } = event.target;
+  const onBlurChange = (e) => {
+    const { name, value } = e.target;
     switch (name) {
       case "name":
         value.trim().length < 2
@@ -62,6 +60,20 @@ export const useForm = (initialValues) => {
           setErrors((prevState) => ({
             ...prevState,
             city: "",
+          }));
+        }
+        break;
+
+      case "area":
+        if (name === "---" && value === "") {
+          setErrors((prevState) => ({
+            ...prevState,
+            area: "Please Select Area",
+          }));
+        } else {
+          setErrors((prevState) => ({
+            ...prevState,
+            area: "",
           }));
         }
         break;

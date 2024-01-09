@@ -11,9 +11,9 @@ function HomePage() {
   const mainLoc = useLocation();
   return (
     <>
-      <Header />
       <div className="big-container">
         <Map />
+        <Header />
       </div>
       <main>
         {mainLoc.pathname === "/" && <Info />}
@@ -22,9 +22,8 @@ function HomePage() {
         ) : null}
         {mainLoc.pathname === "/" && <Roommate />}
       </main>
-      <div className="big-container">
-        <Footer />
-      </div>
+      <Footer />
+      <div className="big-container"></div>
     </>
   );
 }

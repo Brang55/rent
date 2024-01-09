@@ -1,14 +1,12 @@
 .header {
-  position: relative;
-  z-index: 1;
-
-  padding: 20px 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 100%;
+  z-index: 9999;
 }
 
 .diffHeader {
-  position: relative;
-  width: 100%;
-  padding: 20px 0;
-  border-bottom: 1px solid #fff;
-  background-color: #1e1a1a;
+  position: initial;
+  background-color: #0b2c3d;
 }

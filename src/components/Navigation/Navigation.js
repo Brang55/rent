@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 
 import styles from "./Navigation.module.css";
+import "../../style.css";
 
 import Logo from "./images/logo.png";
 
@@ -21,6 +22,15 @@ function Navigation() {
         <li>
           <NavLink to="/properties">Properties</NavLink>
         </li>
+        <li>
+          <NavLink to="/for-rent">For Rent</NavLink>
+        </li>
+        <li>
+          <NavLink to="/for-sale">For Sale</NavLink>
+        </li>
+        <li>
+          <NavLink to="/roommate">Roommate</NavLink>
+        </li>
         {userId ? (
           <li>
             {" "}
@@ -32,7 +42,9 @@ function Navigation() {
         {!userId ? (
           <li>
             {" "}
-            <NavLink to="/login">Login</NavLink>{" "}
+            <NavLink to="/login" className={styles.account}>
+              Login
+            </NavLink>{" "}
           </li>
         ) : (
           ""
@@ -40,7 +52,9 @@ function Navigation() {
         {userId ? (
           <li>
             {" "}
-            <NavLink to="/logout">Logout</NavLink>{" "}
+            <NavLink to="/logout" className={styles.account}>
+              Logout
+            </NavLink>{" "}
           </li>
         ) : (
           ""
@@ -48,7 +62,9 @@ function Navigation() {
         {!userId ? (
           <li>
             {" "}
-            <NavLink to="/register">Register</NavLink>{" "}
+            <NavLink to="/register" className={styles.account}>
+              Register
+            </NavLink>{" "}
           </li>
         ) : (
           ""

@@ -3,6 +3,7 @@
   width: 100%;
   padding: 100px 0;
   border-top: 1px solid #f4511e;
+  background-color: #0b2c3d;
 }
 
 .footerLogo {
@@ -13,6 +14,7 @@
 .infoHolder {
   float: left;
   width: 50%;
+  color: #fff;
 }
 
 .strItem {
@@ -74,7 +76,7 @@
   width: 100%;
   margin-top: 50px;
   padding-top: 24px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #fff;
 }
 
 .footerMenu nav ul {
@@ -85,7 +87,7 @@
 .footerMenu nav ul li {
   float: left;
   font-size: 14px;
-  color: #0a142f;
+  color: #fff;
   margin-right: 3%;
 }
 

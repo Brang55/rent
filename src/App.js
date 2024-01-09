@@ -16,6 +16,7 @@ import MyProperties from "./components/myAccount/MyProperties/MyProperties";
 import PropertyList from "./components/Property/PropertyList/PropertyList";
 
 import "./style.css";
+import RegistrationVerification from "./components/Account/Register/RegistrationVerification";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
             element={<AddProperty />}
           />
         </Route>
+        <Route path="/reg-verify" element={<RegistrationVerification />} />
 
         <Route path="/register" element={<RegistrationForm />} />
         <Route path="/logout" element={<Logout />} />

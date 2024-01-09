@@ -29,6 +29,7 @@ body {
   margin: 0;
   position: relative;
   font-family: "DM Sans", sans-serif;
+  background-color: #ededed;
 }
 
 section,
@@ -46,6 +47,15 @@ article {
 .container {
   width: 1200px;
   margin: 0 auto;
+}
+
+.active {
+  border-bottom: 2.5px solid #ff5a3c !important;
+}
+
+main {
+  float: left;
+  width: 100%;
 }
 
 /* HEADER STARTS */

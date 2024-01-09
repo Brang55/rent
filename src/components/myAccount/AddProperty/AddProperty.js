@@ -49,10 +49,13 @@ function AddProperty() {
     address: "",
     square: "",
     city: "",
+    area: "",
     roomType: "",
     price: "",
     description: "",
   });
+
+  console.log(errors);
 
   const editPath = `/my-account/my-properties/${propertyId}/edit`;
 
@@ -67,6 +70,7 @@ function AddProperty() {
         address: "",
         square: "",
         city: "",
+        // area: "",
         roomType: "",
         price: "",
         description: "",
@@ -202,11 +206,13 @@ function AddProperty() {
 
   return (
     <>
-      {pathname === "/my-account" ? "" : <Header />}
+      {/* {pathname === "/my-account" ? "" : <Header />} */}
+      <Header />
       <main>
-        {pathname === "/my-account" ? "" : <AccountMenu />}
         <section className={styles.addProperty}>
           <div className="container">
+            <AccountMenu />
+            {/* {pathname === "/my-account" ? "" : <AccountMenu />} */}
             <PropertyForm
               {...values}
               per={per}

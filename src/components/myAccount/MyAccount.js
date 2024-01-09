@@ -6,8 +6,8 @@ import Footer from "../Footer/Footer";
 function MyAccount() {
   return (
     <>
-      <Header />
-      <AccountMenu />
+      {/* <Header /> */}
+      {/* <AccountMenu /> */}
       <AddProperty />
       <Footer />
     </>

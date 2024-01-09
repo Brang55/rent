@@ -1,36 +1,32 @@
 .navHeader {
   position: relative;
   width: 1200px;
-  margin: 0 auto;
-  padding: 30px 0 20px 0;
-  border-bottom: 1px solid #fff;
 }
 
 .navHeader ul {
   width: 100%;
+  float: right;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin: 0;
-  padding: 0;
+  padding: 30px 0px;
+  background-color: #0b2c3d;
+  border-radius: 0 0 10px 10px;
 }
 
 .navHeader ul li {
-  margin-right: 5%;
+  float: left;
+  margin-right: 2%;
 }
 
 .navHeader ul li a {
-  font-size: 18px;
-  color: #fff;
-  padding: 20px;
+  font-size: 15px;
+  color: #ededed;
+  padding: 10px 0;
 }
 
 .navHeader ul li a:hover {
-  border-bottom: 2.5px solid #fff;
-}
-
-.active {
-  border-bottom: 2.5px solid #fff !important;
+  border-bottom: 2.5px solid #ff5a3c;
 }
 
 .diffHeader .logo {
@@ -39,6 +35,18 @@
 
 .logo {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 50px;
+}
+
+.account {
+  background-color: #ff5a3c;
+  color: #fff !important;
+  border-radius: 5px;
+  padding: 10px 30px !important;
+}
+
+.account:hover {
+  background-color: #fff;
+  color: #ff5a3c !important;
 }
