@@ -52,10 +52,12 @@ function AddProperty() {
     area: "",
     roomType: "",
     price: "",
+    deal: "",
+    status: "",
     description: "",
   });
 
-  console.log(errors);
+  console.log(values);
 
   const editPath = `/my-account/my-properties/${propertyId}/edit`;
 
@@ -70,8 +72,10 @@ function AddProperty() {
         address: "",
         square: "",
         city: "",
-        // area: "",
+        area: "",
         roomType: "",
+        deal: "",
+        status: "",
         price: "",
         description: "",
       });
@@ -154,18 +158,17 @@ function AddProperty() {
 
   const addPropertySubmit = async (e) => {
     e.preventDefault();
-    if (Object.keys(errors).length === 0) {
-      try {
-        await addDoc(collection(db, "properties"), {
-          ...values,
-          urls,
-          userId: userId,
-          timeStamp: serverTimestamp(),
-        });
-        navigate("/my-account/my-properties");
-      } catch (err) {
-        console.log(err);
-      }
+
+    try {
+      await addDoc(collection(db, "properties"), {
+        ...values,
+        urls,
+        userId: userId,
+        timeStamp: serverTimestamp(),
+      });
+      navigate("/my-account/my-properties");
+    } catch (err) {
+      console.log(err);
     }
   };
 

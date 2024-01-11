@@ -13,9 +13,9 @@ import styles from "../MyInformation/MyInformation.module.css";
 import classes from "../../Property/PropertyItem/PropertyItem.module.css";
 import propClass from "../../Property/PropertyList/PropertyList.module.css";
 
-import Bed from "../../Property/PropertyItem/images/bed.svg";
-import Shower from "../../Property/PropertyItem/images/shower.svg";
-import Size from "../../Property/PropertyItem/images/size.svg";
+// import Bed from "../../Property/PropertyItem/images/bed.svg";
+// import Shower from "../../Property/PropertyItem/images/shower.svg";
+// import Size from "../../Property/PropertyItem/images/size.svg";
 import { useEffect, useState } from "react";
 
 import { useAuthContext } from "../../../context/AuthContext";
@@ -66,9 +66,11 @@ function MyProperties() {
 
   return (
     <>
-      {myPropLocation.pathname === "/my-account" ? "" : <Header />}
+      {/* {myPropLocation.pathname === "/my-account" ? "" : <Header />} */}
+      <Header />
       <main>
-        {myPropLocation.pathname === "/my-account" ? "" : <AccountMenu />}
+        {/* {myPropLocation.pathname === "/my-account" ? "" : <AccountMenu />} */}
+        <AccountMenu />
         <section className={propClass.properties}>
           <div className="container">
             <ul className={propClass.propertyItem}>
@@ -92,7 +94,7 @@ function MyProperties() {
                     <span
                       className={classes.propertyPrice}
                     >{`$${x.price}/Month`}</span>
-                    <div className={classes.roomInfo}>
+                    {/* <div className={classes.roomInfo}>
                       <span>
                         <img src={Bed} alt="" />4
                       </span>
@@ -102,7 +104,7 @@ function MyProperties() {
                       <span>
                         <img src={Size} alt="" />2
                       </span>
-                    </div>
+                    </div> */}
                     <ul className={styles.buttonHolder}>
                       <li>
                         <Link to={`/my-account/my-properties/${x.id}/edit`}>

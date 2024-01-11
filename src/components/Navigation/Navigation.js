@@ -19,9 +19,7 @@ function Navigation() {
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
-        <li>
-          <NavLink to="/properties">Properties</NavLink>
-        </li>
+
         <li>
           <NavLink to="/for-rent">For Rent</NavLink>
         </li>

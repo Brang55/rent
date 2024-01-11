@@ -11,8 +11,10 @@ function PropertyForm({
   address,
   square,
   city,
-  // area,
+  area,
   roomType,
+  deal,
+  status,
   price,
   description,
   urls,
@@ -35,19 +37,19 @@ function PropertyForm({
     backDropHolder,
   } = useConfirm();
 
-  // const [smallCity, dispatch] = useReducer(filterReducer, []);
+  const [smallCity, dispatch] = useReducer(filterReducer, []);
 
-  // const areaDropdown = (selectedCity) => {
-  //   const matchingCities = cities.filter(
-  //     (cityData) => cityData.admin_name === selectedCity
-  //   );
-  //   dispatch({ type: "CITY_CHANGED", payload: matchingCities });
-  // };
+  const areaDropdown = (selectedCity) => {
+    const matchingCities = cities.filter(
+      (cityData) => cityData.admin_name === selectedCity
+    );
+    dispatch({ type: "CITY_CHANGED", payload: matchingCities });
+  };
 
-  // const handleCityChange = (e) => {
-  //   formOnChangleHandler(e);
-  //   areaDropdown(e.target.value);
-  // };
+  const handleCityChange = (e) => {
+    formOnChangleHandler(e);
+    areaDropdown(e.target.value);
+  };
 
   return (
     <form
@@ -114,7 +116,7 @@ function PropertyForm({
           name="city"
           id="city"
           value={city}
-          onChange={formOnChangleHandler}
+          onChange={handleCityChange}
           onBlur={onBlurChange}
           required
         >
@@ -132,7 +134,7 @@ function PropertyForm({
         </select>
         {errors.city && <span className={styles.invalid}>{errors.city}</span>}
       </div>
-      {/* <div className={styles.addPropInput}>
+      <div className={styles.addPropInput}>
         <label htmlFor="area">
           Area<span className={styles.required}>*</span>
         </label>
@@ -154,7 +156,7 @@ function PropertyForm({
           })}
         </select>
         {errors.city && <span className={styles.invalid}>{errors.city}</span>}
-      </div> */}
+      </div>
       <div className={styles.addPropInput}>
         <label htmlFor="room">
           Room Type<span className={styles.required}>*</span>
@@ -193,6 +195,54 @@ function PropertyForm({
         />
         {errors.price && <span className={styles.invalid}>{errors.price}</span>}
       </div>
+
+      <div className={styles.addPropInput}>
+        <label htmlFor="deal">
+          Deal<span className={styles.required}>*</span>
+        </label>
+        <select
+          name="deal"
+          id="deal"
+          value={deal}
+          onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
+          required
+        >
+          <option value="select" selected>
+            ----
+          </option>
+          <option value="For Rent">For Rent</option>
+          <option value="For Sale">For Sale</option>
+          <option value="Roommate">Roommate</option>
+        </select>
+        {errors.roomType && (
+          <span className={styles.invalid}>{errors.roomType}</span>
+        )}
+      </div>
+
+      <div className={styles.addPropInput}>
+        <label htmlFor="status">
+          Status<span className={styles.required}>*</span>
+        </label>
+        <select
+          name="status"
+          id="status"
+          value={status}
+          onChange={formOnChangleHandler}
+          onBlur={onBlurChange}
+          required
+        >
+          <option value="select" selected>
+            ----
+          </option>
+          <option value="Draft">Draft</option>
+          <option value="Publish">Publish</option>
+        </select>
+        {errors.roomType && (
+          <span className={styles.invalid}>{errors.roomType}</span>
+        )}
+      </div>
+
       <div className={styles.description}>
         <label htmlFor="description">
           Description<span className={styles.required}>*</span>

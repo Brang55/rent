@@ -31,6 +31,7 @@
 
 .buttonHolder li {
   width: 32%;
+  float: left;
   margin-right: 2%;
   margin-bottom: 0;
 }

@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import { db } from "../../../config/firebase";
 
 import Header from "../../Header/Header";
@@ -13,23 +19,67 @@ import styles from "./PropertyList.module.css";
 
 function PropertyList() {
   const location = useLocation();
+  console.log(location);
   const [data, setData] = useState([]);
+  const [pageName, setPageName] = useState("");
 
   useEffect(() => {
-    const loadData = async () => {
-      let list = [];
-      try {
-        const properties = await getDocs(collection(db, "properties"));
-        properties.forEach((property) => {
-          list.push({ id: property.id, ...property.data() });
+    const getData = async () => {
+      let newData = [];
+
+      const q = await query(
+        collection(db, "properties"),
+        where("deal", "==", "Roommate")
+      );
+      const q2 = await query(
+        collection(db, "properties"),
+        where("deal", "==", "For Sale")
+      );
+      const q3 = await query(
+        collection(db, "properties"),
+        where("deal", "==", "For Rent")
+      );
+      if (location.pathname === "/for-rent") {
+        setPageName("Properties For Rent");
+        const unsubscribe = onSnapshot(q3, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            newData.push(doc.data());
+          });
+          setData(newData);
         });
-        setData(list);
-      } catch (err) {
-        console.log(err);
+      } else if (location.pathname === "/for-sale") {
+        setPageName("Properties For Sale");
+        const unsubscribe = onSnapshot(q2, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            newData.push(doc.data());
+          });
+          setData(newData);
+        });
+      } else if (location.pathname === "/roommate") {
+        setPageName("Find Roommate");
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            newData.push(doc.data());
+          });
+          setData(newData);
+        });
+      } else if (location.pathname === "/") {
+        let list = [];
+        try {
+          const properties = await getDocs(collection(db, "properties"));
+          properties.forEach((property) => {
+            list.push({ id: property.id, ...property.data() });
+          });
+          setData(list);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        return;
       }
     };
-    loadData();
-  }, []);
+    getData();
+  }, [location.pathname]);
 
   return (
     <>
@@ -43,7 +93,7 @@ function PropertyList() {
             {location.pathname === "/" ? (
               <HomeProperties />
             ) : (
-              <h2 className={styles.allProperties}>Properties</h2>
+              <h2 className={styles.allProperties}>{pageName}</h2>
             )}
             {location.pathname === "/my-account/my-properties" ||
             location.pathname === "/" ? null : (

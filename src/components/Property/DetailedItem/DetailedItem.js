@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ImageGallery from "react-image-gallery";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
@@ -9,6 +10,7 @@ import Footer from "../../Footer/Footer";
 import CommentList from "../../Comments/CommentList";
 
 import styles from "./DetailedItem.module.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { BackButton } from "../../Buttons/Buttons";
 
 function DetailedItem(props) {
@@ -32,47 +34,53 @@ function DetailedItem(props) {
     getItem();
   }, [propertyId]);
 
+  const images = detailedPage
+    .map((detail) => {
+      return detail.urls.map((url) => ({
+        original: url,
+        thumbnail: url,
+      }));
+    })
+    .flat(); // Flatten the array
+
   return (
     <div>
       <Header />
-      <main className="container">
-        <section className={styles.detailedSection}>
-          <BackButton />
-          {detailedPage.map((detail) => {
-            return (
-              <article className={styles.detailedPage} key={propertyId}>
-                <ul className={styles.gallery}>
-                  {detail.urls.map((url) => {
-                    return (
-                      <li key={url}>
-                        <img src={url} alt="text" />
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className={styles.info}>
-                  <h3 className={styles.name}>{detail.name}</h3>
-                  <h2 className={styles.city}>
-                    {detail.city}, {detail.address}{" "}
-                  </h2>
+      <main>
+        <div className="container">
+          <section className={styles.detailedSection}>
+            <BackButton />
 
-                  <span
-                    className={styles.square}
-                  >{`Square: ${detail.square}`}</span>
-                  <span
-                    className={styles.type}
-                  >{`Type: ${detail.roomType}`}</span>
-                  <span
-                    className={styles.price}
-                  >{`$${detail.price}/Month`}</span>
-                </div>
+            {detailedPage.map((detail) => {
+              return (
+                <article className={styles.detailedPage} key={propertyId}>
+                  <div className={styles.gallery}>
+                    <ImageGallery items={images} />
+                  </div>
+                  <div className={styles.info}>
+                    <h3 className={styles.name}>{detail.name}</h3>
+                    <h2 className={styles.city}>
+                      {detail.city}, {detail.address}{" "}
+                    </h2>
 
-                <p className={styles.description}>{detail.description}</p>
-              </article>
-            );
-          })}
-          <CommentList />
-        </section>
+                    <span
+                      className={styles.square}
+                    >{`Square: ${detail.square}`}</span>
+                    <span
+                      className={styles.type}
+                    >{`Type: ${detail.roomType}`}</span>
+                    <span
+                      className={styles.price}
+                    >{`$${detail.price}/Month`}</span>
+                  </div>
+
+                  <p className={styles.description}>{detail.description}</p>
+                </article>
+              );
+            })}
+            <CommentList />
+          </section>
+        </div>
       </main>
       <Footer />
     </div>
