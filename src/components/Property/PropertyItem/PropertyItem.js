@@ -74,8 +74,10 @@ function Property({
       <span className={styles.propertyType}>
         {roomType}, square: {square}
       </span>
-      <span className={styles.propertyPrice}>{`$${price}/Month`}</span>
-      {/* <div className={styles.roomInfo}>
+      <span className={styles.propertyPrice}>{`$${price}${
+        deal === "For Rent" ? "/Month" : ""
+      }`}</span>
+      <div className={styles.roomInfo}>
         <span>
           <img src={Bed} alt="" />4
         </span>
@@ -85,7 +87,7 @@ function Property({
         <span>
           <img src={Size} alt="" />2
         </span>
-      </div> */}
+      </div>
     </li>
   );
 }
